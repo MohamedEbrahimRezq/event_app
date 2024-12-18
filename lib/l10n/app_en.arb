@@ -1,0 +1,8 @@
+{
+  "language": "Language",
+  "english": "English",
+  "arabic" : "Arabic",
+  "theme": "theme",
+  "light": "Light",
+  "dark": "Dark"
+}
