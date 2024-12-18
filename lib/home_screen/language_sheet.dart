@@ -19,9 +19,9 @@ class LanguageBottomSheet extends StatelessWidget {
               Text(AppLocalizations.of(context)!.english,style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black
+                  color: Colors.blueAccent
               ),),
-              Icon(Icons.check, size: 30,),
+              Icon(Icons.check, size: 30,color:  Colors.blueAccent,),
             ],
           ),
           SizedBox(height: height*0.02,),
