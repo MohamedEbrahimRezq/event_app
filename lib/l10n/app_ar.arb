@@ -8,5 +8,17 @@
   "homeTab": "الرئيسية",
   "mapTab": "الخريطة",
   "likeTab": "المفضل",
-  "profileTab": "الملف الشخصى"
+  "profileTab": "الملف الشخصى",
+  "welcome_back": "مرحبا بعودتك",
+  "cairo": "القاهرة",
+  "egypt": "مصر",
+  "all": "الكل",
+  "sport": "الرياضة",
+  "birthday": "عيد ميلاد",
+  "meeting": "اجتماع",
+  "gaming": "العاب",
+  "holiday": "اجازة",
+  "eating": "الطعام",
+  "exhibition": "هوايات",
+  "book_club": "نادى القراءة"
 }

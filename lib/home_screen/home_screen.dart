@@ -1,8 +1,5 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
-import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/home_screen/language_sheet.dart';
-import 'package:event_planning_app/home_screen/theme_sheet.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
 import 'package:event_planning_app/tabs/homeTab/home_tab.dart';
 import 'package:event_planning_app/tabs/likeTab/like_tab.dart';
@@ -11,9 +8,7 @@ import 'package:event_planning_app/tabs/profileTab/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/theme_provider.dart';
-
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';
 
@@ -33,10 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: tabList[selectedIndex],
+
+      extendBodyBehindAppBar: true,
+          body: tabList[selectedIndex],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
           onPressed: (){},

@@ -1,18 +1,12 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
-import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/home_screen/language_sheet.dart';
-import 'package:event_planning_app/home_screen/theme_sheet.dart';
+import 'package:event_planning_app/tabs/profileTab/theme_sheet.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
-import 'package:event_planning_app/tabs/homeTab/home_tab.dart';
-import 'package:event_planning_app/tabs/likeTab/like_tab.dart';
-import 'package:event_planning_app/tabs/mapTab/map_tab.dart';
-import 'package:event_planning_app/tabs/profileTab/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/theme_provider.dart';
+import 'language_sheet.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -25,6 +19,7 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return Padding(
@@ -47,7 +42,7 @@ class _ProfileTabState extends State<ProfileTab> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.primaryColorLight, width: 2)),
+                  border: Border.all(color: AppColors.primaryColor, width: 2)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -55,10 +50,10 @@ class _ProfileTabState extends State<ProfileTab> {
                       languageProvider.appLanguage == 'en'
                           ? AppLocalizations.of(context)!.english
                           : AppLocalizations.of(context)!.arabic,
-                      style: AppStyle.black20w500.copyWith(color: AppColors.primaryColorLight)),
+                      style: AppStyle.black20w500.copyWith(color: AppColors.primaryColor)),
                   const Icon(
                       Icons.arrow_drop_down,
-                      color: AppColors.primaryColorLight,
+                      color: AppColors.primaryColor,
                       size: 35,
                   )
                 ],
@@ -81,7 +76,7 @@ class _ProfileTabState extends State<ProfileTab> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.primaryColorLight, width: 2)),
+                  border: Border.all(color: AppColors.primaryColor, width: 2)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -89,10 +84,10 @@ class _ProfileTabState extends State<ProfileTab> {
                       themeProvider.appTheme == ThemeMode.dark
                           ? AppLocalizations.of(context)!.dark
                           : AppLocalizations.of(context)!.light,
-                      style: AppStyle.black20w500.copyWith(color: AppColors.primaryColorLight)),
+                      style: AppStyle.black20w500.copyWith(color: AppColors.primaryColor)),
                   const Icon(
                     Icons.arrow_drop_down,
-                    color: AppColors.primaryColorLight,
+                    color: AppColors.primaryColor,
                     size: 35,
                   )
                 ],
