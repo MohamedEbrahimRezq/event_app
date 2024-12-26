@@ -7,9 +7,9 @@ class AppTheme {
       color: AppColors.black
     )),
     scaffoldBackgroundColor: AppColors.bglight,
-    primaryColor: AppColors.primaryColorLight,
+    primaryColor: AppColors.primaryColor,
       floatingActionButtonTheme:const FloatingActionButtonThemeData(
-        backgroundColor: AppColors.primaryColorLight,
+        backgroundColor: AppColors.primaryColor,
         shape: StadiumBorder(
           side: BorderSide(
             color: AppColors.white,
@@ -30,7 +30,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.primaryColorDark,
       primaryColor: AppColors.primaryColorDark,
       floatingActionButtonTheme:const FloatingActionButtonThemeData(
-        backgroundColor: AppColors.primaryColorLight,
+        backgroundColor: AppColors.primaryColor,
         shape: StadiumBorder(
           side: BorderSide(
             color: AppColors.white,

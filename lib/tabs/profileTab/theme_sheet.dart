@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import '../app_utls/app_colors.dart';
-import '../provider/theme_provider.dart';
+import '../../app_utls/app_colors.dart';
+import '../../provider/theme_provider.dart';
 
 class ThemeBottomSheet extends StatefulWidget {
   const ThemeBottomSheet({super.key});

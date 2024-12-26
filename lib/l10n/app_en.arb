@@ -9,5 +9,17 @@
   "homeTab": "Home",
   "mapTab": "Map",
   "likeTab": "Like",
-  "profileTab": "Profile"
+  "profileTab": "Profile",
+  "welcome_back": "Welcome Back",
+  "cairo": "Cairo",
+  "egypt": "Egypt",
+  "all": "All",
+  "sport": "Sport",
+  "birthday": "Birthday",
+  "meeting": "Meeting",
+  "gaming": "Gaming",
+  "holiday": "Holiday",
+  "eating": "Eating",
+  "exhibition": "Exhibition",
+  "book_club": "Book Club"
 }
