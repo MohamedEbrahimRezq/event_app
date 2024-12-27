@@ -7,7 +7,8 @@ import '../../provider/theme_provider.dart';
 
 class TabEventWidget extends StatelessWidget {
   String tabName;
-  TabEventWidget({required this.tabName});
+  bool selectedTab;
+  TabEventWidget({required this.selectedTab, required this.tabName});
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -15,14 +16,26 @@ class TabEventWidget extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2),
-      height: height*.05,
+      height: height*.04,
       padding: EdgeInsets.symmetric(vertical: 2,horizontal: 5),
       decoration: BoxDecoration(
+        color: selectedTab==true
+            ?AppColors.white
+            :Colors.transparent
+          ,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color:AppColors.white,width: 2)
+        border: Border.all(
+            color:AppColors.white,
+            width: 2)
 
       ),
-      child: Text(tabName,style: AppStyle.white14medium,),
+      child: Center(
+        child: Text(tabName,style: selectedTab==true
+            ?AppStyle.primary14medium
+            :AppStyle.white14medium,
+          textAlign: TextAlign.center,
+        ),
+      ),
 
          );
   }
