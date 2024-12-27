@@ -11,4 +11,13 @@ class AssetsManager {
   static const String iconMapSelected = "assets/images/selected_map_tab.png";
   static const String iconLikeSelected = "assets/images/selected_like_tab.png";
   static const String iconProfileSelected = "assets/images/selected_profile_tab.png";
+  static const String birthdayBg = "assets/images/birthdayBg.png";
+  static const String bookclubBg = "assets/images/bookclubBg.png";
+  static const String eatingBg = "assets/images/eatingBg.png";
+  static const String exhibitionBg = "assets/images/exhibitionBg.png";
+  static const String gamingBg = "assets/images/gamingBg.png";
+  static const String holidayBg = "assets/images/holidayBg.png";
+  static const String meetingBg = "assets/images/meetingBg.png";
+  static const String sportBg = "assets/images/sportBg.png";
+  static const String workshopBg = "assets/images/workshopBg.png";
 }

@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  List<Widget> tabList = [const HomeTab(), const MapTab(), const LikeTab(), const ProfileTab()];
+  List<Widget> tabList = [ HomeTab(),  MapTab(),  LikeTab(),  ProfileTab()];
 
   @override
   Widget build(BuildContext context) {

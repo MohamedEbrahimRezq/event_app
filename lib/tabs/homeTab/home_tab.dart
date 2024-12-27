@@ -1,16 +1,20 @@
 
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
+import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/tabs/homeTab/event_widget.dart';
 import 'package:event_planning_app/tabs/homeTab/tab_event_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../provider/language_provider.dart';
-import '../../provider/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeTab extends StatelessWidget {
-  const HomeTab({super.key});
+class HomeTab extends StatefulWidget {
 
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  int selectedTab = 0;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -25,6 +29,7 @@ class HomeTab extends StatelessWidget {
       AppLocalizations.of(context)!.holiday,
       AppLocalizations.of(context)!.exhibition,
       AppLocalizations.of(context)!.book_club,
+      AppLocalizations.of(context)!.work_shop,
     ];
     return Scaffold(
       body: Column(
@@ -112,20 +117,96 @@ class HomeTab extends StatelessWidget {
                   ),
                 ),
                 DefaultTabController(
-                    initialIndex: 0,
                     length: eventList.length,
                     child: TabBar(
+                     onTap: (index){
+                       selectedTab=index;
+                       setState(() {
+
+                       });
+                     },
+                      labelColor: Colors.red,
+                        dividerColor: Colors.transparent,
                         isScrollable: true,
-                        padding: EdgeInsets.symmetric(horizontal: 0),
+                        indicatorColor: Colors.transparent,
+                        labelPadding: EdgeInsets.all(5),
                         tabs: [
-                          TabEventWidget(tabName: eventList[0]),
-                          TabEventWidget(tabName: eventList[1]),
-                          TabEventWidget(tabName: eventList[2]),
-                          TabEventWidget(tabName: eventList[3]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==0
+                              ?true
+                              :false
+                              ,tabName: eventList[0]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==1
+                              ?true
+                              :false
+                              ,tabName: eventList[1]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==2
+                              ?true
+                              :false
+                              ,tabName: eventList[2]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==3
+                              ?true
+                              :false
+                              ,tabName: eventList[3]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==4
+                              ?true
+                              :false
+                              ,tabName: eventList[4]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==5
+                              ?true
+                              :false
+                              ,tabName: eventList[5]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==6
+                              ?true
+                              :false
+                              ,tabName: eventList[6]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==7
+                              ?true
+                              :false
+                              ,tabName: eventList[7]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==8
+                              ?true
+                              :false
+                              ,tabName: eventList[8]),
+                          TabEventWidget(selectedTab:
+                          selectedTab==9
+                              ?true
+                              :false
+                              ,tabName: eventList[9]),
                         ]))
               ],
             ),
           ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    EventWidget(imageBg: AssetsManager.birthdayBg,eventName: AppLocalizations.of(context)!.birthday,),
+                    EventWidget(imageBg: AssetsManager.sportBg,eventName: AppLocalizations.of(context)!.sport,),
+                    EventWidget(imageBg: AssetsManager.meetingBg,eventName: AppLocalizations.of(context)!.meeting,),
+                    EventWidget(imageBg: AssetsManager.gamingBg,eventName: AppLocalizations.of(context)!.gaming,),
+                    EventWidget(imageBg: AssetsManager.eatingBg,eventName: AppLocalizations.of(context)!.eating,),
+                    EventWidget(imageBg: AssetsManager.holidayBg,eventName: AppLocalizations.of(context)!.holiday,),
+                    EventWidget(imageBg: AssetsManager.exhibitionBg,eventName: AppLocalizations.of(context)!.exhibition,),
+                    EventWidget(imageBg: AssetsManager.bookclubBg,eventName: AppLocalizations.of(context)!.book_club,),
+                    EventWidget(imageBg: AssetsManager.workshopBg,eventName: AppLocalizations.of(context)!.work_shop,),
+
+                  ],
+                ),
+              ),
+            ),
+          )
+
         ],
       ),
     );
