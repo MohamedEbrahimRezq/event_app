@@ -23,34 +23,36 @@ class ForgetPassword extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: height * .015,
-            ),
-            Image(image: AssetImage(AssetsManager.forgetPassword),fit: BoxFit.fill,),
-            SizedBox(
-              height: height * .02,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.email,
-              preIcon: Icons.lock,
-            ),
-            SizedBox(
-              height: height * .02,
-            ),
-            CustomElevatedButton(
-              onButtonClicked: (){
-                Navigator.pushReplacementNamed(context, CreateAccount.routeName);
-              },
-              buttonColor: AppColors.primaryColorLight,
-              buttonName: AppLocalizations.of(context)!.reset_password,
-              textColor: AppColors.white,
-              borderColor: AppColors.primaryColorLight,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: height * .015,
+              ),
+              Image(image: AssetImage(AssetsManager.forgetPassword),fit: BoxFit.fill,),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.email,
+                preIcon: Icons.lock,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomElevatedButton(
+                onButtonClicked: (){
+                  Navigator.pushReplacementNamed(context, CreateAccount.routeName);
+                },
+                buttonColor: AppColors.primaryColorLight,
+                buttonName: AppLocalizations.of(context)!.reset_password,
+                textColor: AppColors.white,
+                borderColor: AppColors.primaryColorLight,
+              ),
+            ],
+          ),
         ),
       ),
 

@@ -21,112 +21,114 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: height * .05,
-            ),
-            Image(image: AssetImage(AssetsManager.logo)),
-            SizedBox(
-              height: height * .01,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.email,
-              preIcon: Icons.mail_rounded,
-            ),
-            SizedBox(
-              height: height * .01,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.password,
-              preIcon: Icons.lock,
-              afterIcon: Icons.visibility,
-            ),
-            SizedBox(
-              height: height * .015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, ForgetPassword.routeName);
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.forget_password,
-                    style: AppStyle.primary14bold.copyWith(
-                      fontStyle: FontStyle.italic,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColorLight,
-                      decorationThickness: 2,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: height * .05,
+              ),
+              Image(image: AssetImage(AssetsManager.logo)),
+              SizedBox(
+                height: height * .01,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.email,
+                preIcon: Icons.mail_rounded,
+              ),
+              SizedBox(
+                height: height * .01,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.password,
+                preIcon: Icons.lock,
+                afterIcon: Icons.visibility,
+              ),
+              SizedBox(
+                height: height * .015,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, ForgetPassword.routeName);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.forget_password,
+                      style: AppStyle.primary14bold.copyWith(
+                        fontStyle: FontStyle.italic,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColorLight,
+                        decorationThickness: 2,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: height * .02,
-            ),
-            CustomElevatedButton(
-              onButtonClicked: (){
-                Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-              },
-              buttonColor: AppColors.primaryColorLight,
-              buttonName: AppLocalizations.of(context)!.login,
-              textColor: AppColors.white,
-              borderColor: AppColors.primaryColorLight,
-            ),
-            SizedBox(
-              height: height * .02,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(AppLocalizations.of(context)!.havenot_account,
-                    style: AppStyle.black16medium),
-                InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, CreateAccount.routeName);
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.create_account,
-                    style: AppStyle.primary14bold.copyWith(
-                      fontStyle: FontStyle.italic,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColorLight,
-                      decorationThickness: 2,
+                ],
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomElevatedButton(
+                onButtonClicked: (){
+                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                },
+                buttonColor: AppColors.primaryColorLight,
+                buttonName: AppLocalizations.of(context)!.login,
+                textColor: AppColors.white,
+                borderColor: AppColors.primaryColorLight,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(AppLocalizations.of(context)!.havenot_account,
+                      style: AppStyle.black16medium),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, CreateAccount.routeName);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.create_account,
+                      style: AppStyle.primary14bold.copyWith(
+                        fontStyle: FontStyle.italic,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColorLight,
+                        decorationThickness: 2,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: height * .02,
-            ),
-            Divider(
-              color: AppColors.primaryColorLight,
-            ),
-            Text( AppLocalizations.of(context)!.or,style: AppStyle.primary14medium,),
-            Divider(
-              color: AppColors.primaryColorLight,
-            ),
-            SizedBox(
-              height: height * .02,
-            ),
-            CustomElevatedButton(
-              onButtonClicked: (){
-              },
-              textColor: AppColors.primaryColorLight,
-              buttonColor: Theme.of(context).primaryColorLight,
-              buttonName: AppLocalizations.of(context)!.loginWithGoogle,
-              borderColor: AppColors.primaryColorLight,
-              preIcon: AssetsManager.googleIcon,
-            ),
-          ],
+                ],
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              Divider(
+                color: AppColors.primaryColorLight,
+              ),
+              Text( AppLocalizations.of(context)!.or,style: AppStyle.primary14medium,),
+              Divider(
+                color: AppColors.primaryColorLight,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomElevatedButton(
+                onButtonClicked: (){
+                },
+                textColor: AppColors.primaryColorLight,
+                buttonColor: Theme.of(context).primaryColorLight,
+                buttonName: AppLocalizations.of(context)!.loginWithGoogle,
+                borderColor: AppColors.primaryColorLight,
+                preIcon: AssetsManager.googleIcon,
+              ),
+            ],
+          ),
         ),
       ),
     );
