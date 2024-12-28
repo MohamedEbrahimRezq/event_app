@@ -2,13 +2,13 @@ import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../app_utls/app_styles.dart';
 
-class CustomTextFormFeild extends StatelessWidget {
+class CustomTextFormField extends StatelessWidget {
   Color borderColor;
   IconData? preIcon;
   IconData? afterIcon;
   String? hintText;
   int? numLines;
-  CustomTextFormFeild({
+  CustomTextFormField({
     required this.borderColor,
     this.preIcon,
     this.afterIcon,

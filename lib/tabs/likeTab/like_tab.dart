@@ -1,11 +1,10 @@
 import 'package:event_planning_app/home_screen/custom_text_form_feild.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 import '../../app_utls/app_colors.dart';
 import '../../app_utls/assets_manager.dart';
-import '../../provider/language_provider.dart';
-import '../../provider/theme_provider.dart';
+
 import '../homeTab/event_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,7 +24,7 @@ class LikeTab extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: CustomTextFormFeild(
+              child: CustomTextFormField(
                 borderColor: AppColors.primaryColorLight,
                 preIcon: Icons.search_outlined,
                 hintText: AppLocalizations.of(context)!.search,
