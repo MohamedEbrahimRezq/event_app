@@ -7,7 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   IconData? afterIcon;
   String? hintText;
   int? numLines;
-  CustomTextFormField({
+  CustomTextFormField({super.key,
     required this.borderColor,
     this.preIcon,
     this.afterIcon,

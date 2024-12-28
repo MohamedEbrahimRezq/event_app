@@ -135,52 +135,75 @@ class _HomeTabState extends State<HomeTab> {
                           selectedTab==0
                               ?true
                               :false
-                              ,tabName: eventList[0]),
+                              ,tabName: eventList[0],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,
+
+                          ),
                           TabEventWidget(selectedTab:
                           selectedTab==1
                               ?true
                               :false
-                              ,tabName: eventList[1]),
+                              ,tabName: eventList[1],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,
+                          ),
                           TabEventWidget(selectedTab:
                           selectedTab==2
                               ?true
                               :false
-                              ,tabName: eventList[2]),
+                              ,tabName: eventList[2],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==3
                               ?true
                               :false
-                              ,tabName: eventList[3]),
+                              ,tabName: eventList[3],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==4
                               ?true
                               :false
-                              ,tabName: eventList[4]),
+                              ,tabName: eventList[4],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==5
                               ?true
                               :false
-                              ,tabName: eventList[5]),
+                              ,tabName: eventList[5],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==6
                               ?true
                               :false
-                              ,tabName: eventList[6]),
+                              ,tabName: eventList[6],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==7
                               ?true
                               :false
-                              ,tabName: eventList[7]),
+                              ,tabName: eventList[7],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==8
                               ?true
                               :false
-                              ,tabName: eventList[8]),
+                              ,tabName: eventList[8],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                           TabEventWidget(selectedTab:
                           selectedTab==9
                               ?true
                               :false
-                              ,tabName: eventList[9]),
+                              ,tabName: eventList[9],
+                            selectedColor: AppColors.white,
+                            unSelectedColor: AppColors.primaryColorLight,),
                         ]))
               ],
             ),

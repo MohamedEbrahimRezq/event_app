@@ -8,7 +8,16 @@ import '../../provider/theme_provider.dart';
 class TabEventWidget extends StatelessWidget {
   String tabName;
   bool selectedTab;
-  TabEventWidget({required this.selectedTab, required this.tabName});
+  Color selectedColor;
+  Color unSelectedColor;
+
+  TabEventWidget({
+    required this.selectedTab,
+    required this.tabName,
+    required this.selectedColor,
+    required this.unSelectedColor,
+
+  });
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -20,19 +29,27 @@ class TabEventWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 2,horizontal: 5),
       decoration: BoxDecoration(
         color: selectedTab==true
-            ?AppColors.white
-            :Colors.transparent
+            ?selectedColor
+            :unSelectedColor
           ,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-            color:AppColors.white,
+            color:selectedTab==true
+                ?unSelectedColor
+                :selectedColor
+            ,
             width: 2)
 
       ),
       child: Center(
-        child: Text(tabName,style: selectedTab==true
-            ?AppStyle.primary14medium
-            :AppStyle.white14medium,
+        child: Text(
+          tabName,style: selectedTab==true
+            ?AppStyle.primary14medium.copyWith(
+          color: unSelectedColor
+        )
+            :AppStyle.white14medium.copyWith(
+            color: selectedColor
+        ),
           textAlign: TextAlign.center,
         ),
       ),
