@@ -1,6 +1,5 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../app_utls/app_styles.dart';
 
 class CustomTextFormFeild extends StatelessWidget {

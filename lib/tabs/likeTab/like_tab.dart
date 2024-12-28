@@ -15,9 +15,6 @@ class LikeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-    var languageProvider = Provider.of<AppLanguageProvider>(context);
-    var themeProvider = Provider.of<AppThemeProvider>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
