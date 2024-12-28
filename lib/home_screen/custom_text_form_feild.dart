@@ -1,7 +1,6 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../app_utls/app_styles.dart';
-
 class CustomTextFormField extends StatelessWidget {
   Color borderColor;
   IconData? preIcon;
