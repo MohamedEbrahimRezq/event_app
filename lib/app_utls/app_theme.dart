@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
-    textTheme:  TextTheme(bodyMedium: TextStyle(
-      color: AppColors.black
-    )),
     scaffoldBackgroundColor: AppColors.bglight,
-    primaryColor: AppColors.primaryColor,
+    appBarTheme: AppBarTheme(color: AppColors.primaryColorLight),
+    primaryColor: AppColors.primaryColorLight,
       floatingActionButtonTheme:const FloatingActionButtonThemeData(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: Colors.transparent,
         shape: StadiumBorder(
           side: BorderSide(
             color: AppColors.white,
@@ -24,13 +22,12 @@ class AppTheme {
       ),
   );
   static final ThemeData darkTheme = ThemeData(
-      textTheme:  TextTheme(bodyMedium: TextStyle(
-          color: AppColors.white
-      )),
       scaffoldBackgroundColor: AppColors.primaryColorDark,
+      primaryColorDark: AppColors.primaryColorDark,
+      appBarTheme: AppBarTheme(color: AppColors.primaryColorDark),
       primaryColor: AppColors.primaryColorDark,
       floatingActionButtonTheme:const FloatingActionButtonThemeData(
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: Colors.transparent,
         shape: StadiumBorder(
           side: BorderSide(
             color: AppColors.white,

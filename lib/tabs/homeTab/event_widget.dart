@@ -22,7 +22,7 @@ class EventWidget extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage(imageBg),fit: BoxFit.fill),
-        border: Border.all(width: 2,color: AppColors.primaryColor),
+        border: Border.all(width: 2,color: AppColors.primaryColorLight),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -64,7 +64,7 @@ class EventWidget extends StatelessWidget {
                   eventName,
                   textAlign: TextAlign.center,
                   style: AppStyle.primary20bold,),
-                Icon(CupertinoIcons.heart,color: AppColors.primaryColor,size: 30,),
+                Icon(CupertinoIcons.heart,color: AppColors.primaryColorLight,size: 30,),
               ],
             ),
           ),

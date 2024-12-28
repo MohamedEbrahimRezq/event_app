@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return Scaffold(
-
       extendBodyBehindAppBar: true,
           body: tabList[selectedIndex],
       floatingActionButton: FloatingActionButton(
@@ -38,12 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Theme(
+
         data: Theme.of(context).copyWith(
           canvasColor: AppColors.transparent,
         ),
         child: BottomAppBar(
-
           color: Theme.of(context).primaryColor,
+
           notchMargin: 4,
           padding: EdgeInsets.zero,
           shape: CircularNotchedRectangle(),
@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ]),
         ),
       ),
+
     );
   }
 
