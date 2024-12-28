@@ -38,5 +38,12 @@
   "login": "Login",
   "loginWithGoogle": "Login With Google",
   "register": "Register",
-  "log_out": "Logout"
+  "log_out": "Logout",
+  "title": "Title",
+  "description": "Description",
+  "eventDate": "Event Date",
+  "chooseDate": "Choose Date",
+  "chooseTime": "Choose Time",
+  "eventTime": "Event Time",
+  "location": "Location"
 }

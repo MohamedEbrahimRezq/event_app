@@ -37,5 +37,12 @@
   "login": "تسجيل دخول",
   "loginWithGoogle": "تسجيل دخول باستخدام حساب جوجل",
   "register": "تسجيل",
-  "log_out": "خروج"
+  "log_out": "خروج",
+  "title": "العنوان",
+  "description": "الوصف",
+  "eventDate": "تاريخ الحدث",
+  "eventTime": "وقت الحدث",
+    "chooseDate": "اختر التاريخ",
+    "chooseTime": "اختر الوقت",
+  "location": "الموقع الجغرافى"
 }

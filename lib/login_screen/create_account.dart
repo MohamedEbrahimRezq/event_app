@@ -23,84 +23,86 @@ class CreateAccount extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: height * .05,
-            ),
-            Image(image: AssetImage(AssetsManager.logo)),
-            SizedBox(
-              height: height * .01,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.name,
-              preIcon: Icons.person,
-            ),
-            SizedBox(
-              height: height * .01,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.email,
-              preIcon: Icons.lock,
-            ),
-            SizedBox(
-              height: height * .015,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.password,
-              preIcon: Icons.lock,
-              afterIcon: Icons.visibility,
-            ),
-            SizedBox(
-              height: height * .015,
-            ),
-            CustomTextFormField(
-              borderColor: AppColors.gray,
-              hintText: AppLocalizations.of(context)!.re_password,
-              preIcon: Icons.lock,
-              afterIcon: Icons.visibility,
-            ),
-            SizedBox(
-              height: height * .015,
-            ),
-            CustomElevatedButton(
-              onButtonClicked: (){
-                Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-              },
-              buttonColor: AppColors.primaryColorLight,
-              buttonName: AppLocalizations.of(context)!.create_account,
-              textColor: AppColors.white,
-              borderColor: AppColors.primaryColorLight,
-            ),
-            SizedBox(
-              height: height * .015,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(AppLocalizations.of(context)!.have_Account,
-                    style: AppStyle.black16medium),
-                InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, LoginScreen.routeName);
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.login,
-                    style: AppStyle.primary14bold.copyWith(
-                      fontStyle: FontStyle.italic,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.primaryColorLight,
-                      decorationThickness: 2,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: height * .05,
+              ),
+              Image(image: AssetImage(AssetsManager.logo)),
+              SizedBox(
+                height: height * .01,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.name,
+                preIcon: Icons.person,
+              ),
+              SizedBox(
+                height: height * .01,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.email,
+                preIcon: Icons.lock,
+              ),
+              SizedBox(
+                height: height * .015,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.password,
+                preIcon: Icons.lock,
+                afterIcon: Icons.visibility,
+              ),
+              SizedBox(
+                height: height * .015,
+              ),
+              CustomTextFormField(
+                borderColor: AppColors.gray,
+                hintText: AppLocalizations.of(context)!.re_password,
+                preIcon: Icons.lock,
+                afterIcon: Icons.visibility,
+              ),
+              SizedBox(
+                height: height * .015,
+              ),
+              CustomElevatedButton(
+                onButtonClicked: (){
+                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                },
+                buttonColor: AppColors.primaryColorLight,
+                buttonName: AppLocalizations.of(context)!.create_account,
+                textColor: AppColors.white,
+                borderColor: AppColors.primaryColorLight,
+              ),
+              SizedBox(
+                height: height * .015,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(AppLocalizations.of(context)!.have_Account,
+                      style: AppStyle.black16medium),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, LoginScreen.routeName);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.login,
+                      style: AppStyle.primary14bold.copyWith(
+                        fontStyle: FontStyle.italic,
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColorLight,
+                        decorationThickness: 2,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-
-          ],
+                ],
+              ),
+          
+            ],
+          ),
         ),
       ),
 
