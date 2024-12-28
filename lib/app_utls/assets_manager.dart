@@ -20,4 +20,5 @@ class AssetsManager {
   static const String meetingBg = "assets/images/meetingBg.png";
   static const String sportBg = "assets/images/sportBg.png";
   static const String workshopBg = "assets/images/workshopBg.png";
+  static const String routeLogo = "assets/images/route_logo.png";
 }
