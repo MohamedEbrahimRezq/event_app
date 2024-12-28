@@ -3,9 +3,12 @@ import 'package:event_planning_app/provider/language_provider.dart';
 import 'package:event_planning_app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'create_event_screen/create_event.dart';
 import 'home_screen/home_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'login_screen/create_account.dart';
+import 'login_screen/forget_password.dart';
 import 'login_screen/login_screen.dart';
 
 void main() {
@@ -24,10 +27,13 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:HomeScreen.routeName,
+      initialRoute:LoginScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
+        CreateAccount.routeName: (context) => CreateAccount(),
+        ForgetPassword.routeName: (context) => ForgetPassword(),
+        CreateEvent.routeName: (context) => CreateEvent(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
