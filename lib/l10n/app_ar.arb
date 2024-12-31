@@ -33,6 +33,7 @@
   "have_Account": "لديك حساب بالفعل ؟",
   "create_account": "إنشاء حساب",
   "create_event": "انشاء حدث",
+  "add_event": "إضافة حدث",
   "or": "أو",
   "login": "تسجيل دخول",
   "loginWithGoogle": "تسجيل دخول باستخدام حساب جوجل",
@@ -42,7 +43,7 @@
   "description": "الوصف",
   "eventDate": "تاريخ الحدث",
   "eventTime": "وقت الحدث",
-    "chooseDate": "اختر التاريخ",
-    "chooseTime": "اختر الوقت",
+  "chooseDate": "اختر التاريخ",
+  "chooseTime": "اختر الوقت",
   "location": "الموقع الجغرافى"
 }

@@ -1,4 +1,7 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/firebase_files.dart';
+import 'package:event_planning_app/model/events.dart';
+import 'package:event_planning_app/reuseable_widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../app_utls/app_colors.dart';
@@ -59,7 +62,6 @@ class _CreateEventState extends State<CreateEvent> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-
             children: [
               Container(
                 height: height*.25,
@@ -67,7 +69,6 @@ class _CreateEventState extends State<CreateEvent> {
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(image: AssetImage(eventImageList[selectedTab]),fit: BoxFit.fill,),
                 ),),
-
               DefaultTabController(
                   length: eventList.length,
                   child: TabBar(
@@ -151,6 +152,12 @@ class _CreateEventState extends State<CreateEvent> {
               Text(AppLocalizations.of(context)!.title,style: AppStyle.black16medium,),
               SizedBox(height: height*.01,),
               CustomTextFormField(
+                validator: (text){
+                  if (text== null || text.isEmpty){
+                    return 'Please Enter Event Title';
+                  }
+                  return null;
+                },
                 borderColor: AppColors.gray,
                 preIcon: Icons.edit_note_outlined,
                 hintText: AppLocalizations.of(context)!.title,
@@ -159,6 +166,12 @@ class _CreateEventState extends State<CreateEvent> {
               Text(AppLocalizations.of(context)!.description,style: AppStyle.black16medium,),
               SizedBox(height: height*.015,),
               CustomTextFormField(
+                validator: (text){
+                  if (text== null || text.isEmpty){
+                    return 'Please Enter Event Description';
+                  }
+                  return null;
+                },
                 borderColor: AppColors.gray,
                 hintText: AppLocalizations.of(context)!.description,
                 numLines: 5,
@@ -185,6 +198,22 @@ class _CreateEventState extends State<CreateEvent> {
               ),
               SizedBox(height: height*.015,),
               Text(AppLocalizations.of(context)!.location,style: AppStyle.black16medium,),
+              CustomElevatedButton(
+                  onButtonClicked: (){
+                    Event event = Event(
+                        title: title,
+                        description: description,
+                        image: image,
+                        eventName: eventName,
+                        dateTime: dateTime,
+                        time: time)
+                    FirebaseFiles.addEventToFireStore();
+
+                  },
+                  buttonColor: AppColors.blue,
+                  buttonName: AppLocalizations.of(context)!.add_event,
+                  textColor: AppColors.white,
+                  borderColor: AppColors.transparent)
             ],
           ),
         ),

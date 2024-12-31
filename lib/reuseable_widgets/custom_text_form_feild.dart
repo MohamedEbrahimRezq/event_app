@@ -7,17 +7,21 @@ class CustomTextFormField extends StatelessWidget {
   IconData? afterIcon;
   String? hintText;
   int? numLines;
+  String? Function(String?)? validator;
+
   CustomTextFormField({super.key,
     required this.borderColor,
     this.preIcon,
     this.afterIcon,
     this.hintText,
-    this.numLines
+    this.numLines,
+    this.validator
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       onTap: (){},
       maxLines: numLines,
       style: AppStyle.primary14bold.copyWith(
