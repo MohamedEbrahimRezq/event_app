@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_app/app_utls/app_theme.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
 import 'package:event_planning_app/provider/theme_provider.dart';
@@ -6,12 +7,18 @@ import 'package:provider/provider.dart';
 import 'create_event_screen/create_event.dart';
 import 'home_screen/home_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'login_screen/create_account.dart';
 import 'login_screen/forget_password.dart';
 import 'login_screen/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
     ChangeNotifierProvider(create: (context) => AppThemeProvider())

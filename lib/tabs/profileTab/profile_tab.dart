@@ -28,7 +28,7 @@ class _ProfileTabState extends State<ProfileTab> {
       body: Column(
         children: [
           Container(
-            height: height * 0.23,
+            height: height * 0.28,
             decoration: BoxDecoration(
               color: AppColors.primaryColorLight,
               borderRadius: BorderRadius.only(
@@ -148,7 +148,7 @@ class _ProfileTabState extends State<ProfileTab> {
                     ),
                   ),
                 ),
-                SizedBox(height: height*.25,),
+                SizedBox(height: height*0.1),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, LoginScreen.routeName);

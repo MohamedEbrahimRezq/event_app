@@ -34,11 +34,11 @@ class _HomeTabState extends State<HomeTab> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: height * 0.03,
-          ),
+          // SizedBox(
+          //   height: height * 0.03,
+          // ),
           Container(
-            height: height * 0.2,
+            height: height * 0.22,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.only(

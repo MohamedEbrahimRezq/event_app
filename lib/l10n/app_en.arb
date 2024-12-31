@@ -34,6 +34,7 @@
   "have_Account": "Already Have An Account ?",
   "create_account": "Create Account",
   "create_event": "Create Event",
+  "add_event": "Add Event",
   "or": "Or",
   "login": "Login",
   "loginWithGoogle": "Login With Google",
