@@ -62,7 +62,6 @@ class _CreateEventState extends State<CreateEvent> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-
             children: [
               Container(
                 height: height*.25,
@@ -70,7 +69,6 @@ class _CreateEventState extends State<CreateEvent> {
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(image: AssetImage(eventImageList[selectedTab]),fit: BoxFit.fill,),
                 ),),
-
               DefaultTabController(
                   length: eventList.length,
                   child: TabBar(
@@ -155,7 +153,7 @@ class _CreateEventState extends State<CreateEvent> {
               SizedBox(height: height*.01,),
               CustomTextFormField(
                 validator: (text){
-                  if (text.isEmpty){
+                  if (text== null || text.isEmpty){
                     return 'Please Enter Event Title';
                   }
                   return null;
@@ -168,6 +166,12 @@ class _CreateEventState extends State<CreateEvent> {
               Text(AppLocalizations.of(context)!.description,style: AppStyle.black16medium,),
               SizedBox(height: height*.015,),
               CustomTextFormField(
+                validator: (text){
+                  if (text== null || text.isEmpty){
+                    return 'Please Enter Event Description';
+                  }
+                  return null;
+                },
                 borderColor: AppColors.gray,
                 hintText: AppLocalizations.of(context)!.description,
                 numLines: 5,
