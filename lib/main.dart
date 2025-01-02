@@ -11,7 +11,7 @@ import 'login_screen/create_account.dart';
 import 'login_screen/forget_password.dart';
 import 'login_screen/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'fire_base/firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
