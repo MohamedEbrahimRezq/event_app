@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:event_planning_app/model/events.dart';
+
+
+import 'model/events.dart';
 
 class FirebaseFiles {
 

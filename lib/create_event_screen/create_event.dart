@@ -1,9 +1,8 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/firebase_files.dart';
-import 'package:event_planning_app/model/events.dart';
 import 'package:event_planning_app/reuseable_widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import '../app_utls/app_colors.dart';
 import '../app_utls/app_styles.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
@@ -17,10 +16,19 @@ class CreateEvent extends StatefulWidget {
 }
 
 class _CreateEventState extends State<CreateEvent> {
-  int selectedTab=0;
+  int selectedTab = 0;
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
+  var formKey = GlobalKey<FormState>();
+  var titleController = TextEditingController();
+  var descriptionController = TextEditingController();
+  String? formatedDate;
+  String? formatedTime;
+  String selectedImage = '';
+  String selectedEventName = '';
+
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List<String> eventList = [
@@ -45,7 +53,8 @@ class _CreateEventState extends State<CreateEvent> {
       AssetsManager.bookclubBg,
       AssetsManager.workshopBg,
     ];
-
+    selectedImage = eventImageList[selectedTab];
+    selectedEventName = eventList[selectedTab];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparent,
@@ -59,165 +68,192 @@ class _CreateEventState extends State<CreateEvent> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                height: height*.25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(image: AssetImage(eventImageList[selectedTab]),fit: BoxFit.fill,),
-                ),),
-              DefaultTabController(
-                  length: eventList.length,
-                  child: TabBar(
-                      onTap: (index){
-                        selectedTab=index;
-                        setState(() {
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: height * .25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: AssetImage(selectedImage),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.only(top: height * .01, bottom: height * .001),
+                  height: height * .05,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: eventList.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            selectedTab = index;
 
-                        });
-                      },
-                      dividerColor: Colors.transparent,
-                      isScrollable: true,
-                      indicatorColor: Colors.transparent,
-                      labelPadding: EdgeInsets.all(5),
-                      tabs: [
-                        TabEventWidget(selectedTab:
-                        selectedTab==0
-                            ?true
-                            :false
-                            ,tabName: eventList[0],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.bglight,
-                        ),
-                        TabEventWidget(selectedTab:
-                        selectedTab==1
-                            ?true
-                            :false
-                            ,tabName: eventList[1],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==2
-                            ?true
-                            :false
-                            ,tabName: eventList[2],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==3
-                            ?true
-                            :false
-                            ,tabName: eventList[3],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==4
-                            ?true
-                            :false
-                            ,tabName: eventList[4],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==5
-                            ?true
-                            :false
-                            ,tabName: eventList[5],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==6
-                            ?true
-                            :false
-                            ,tabName: eventList[6],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==7
-                            ?true
-                            :false
-                            ,tabName: eventList[7],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
-                        TabEventWidget(selectedTab:
-                        selectedTab==8
-                            ?true
-                            :false
-                            ,tabName: eventList[8],
-                          selectedColor: AppColors.primaryColorLight,
-                          unSelectedColor: AppColors.white,),
 
-                      ])),
-              Text(AppLocalizations.of(context)!.title,style: AppStyle.black16medium,),
-              SizedBox(height: height*.01,),
-              CustomTextFormField(
-                validator: (text){
-                  if (text== null || text.isEmpty){
-                    return 'Please Enter Event Title';
-                  }
-                  return null;
-                },
-                borderColor: AppColors.gray,
-                preIcon: Icons.edit_note_outlined,
-                hintText: AppLocalizations.of(context)!.title,
-              ),
-              SizedBox(height: height*.01,),
-              Text(AppLocalizations.of(context)!.description,style: AppStyle.black16medium,),
-              SizedBox(height: height*.015,),
-              CustomTextFormField(
-                validator: (text){
-                  if (text== null || text.isEmpty){
-                    return 'Please Enter Event Description';
-                  }
-                  return null;
-                },
-                borderColor: AppColors.gray,
-                hintText: AppLocalizations.of(context)!.description,
-                numLines: 5,
-              ),
-              SizedBox(height: height*.015,),
-              Row(
-                children: [
-                  Icon(Icons.date_range_outlined),
-                  SizedBox(width: width*.015,),
-                  Text(AppLocalizations.of(context)!.eventDate,style: AppStyle.black16medium,),
-                  Spacer(),
-                  Text(AppLocalizations.of(context)!.chooseDate,style: AppStyle.primary14bold,),
-                ],
-              ),
-              SizedBox(height: height*.015,),
-              Row(
-                children: [
-                  Icon(Icons.access_time),
-                  SizedBox(width: width*.015,),
-                  Text(AppLocalizations.of(context)!.eventTime,style: AppStyle.black16medium,),
-                  Spacer(),
-                  Text(AppLocalizations.of(context)!.chooseTime,style: AppStyle.primary14bold,),
-                ],
-              ),
-              SizedBox(height: height*.015,),
-              Text(AppLocalizations.of(context)!.location,style: AppStyle.black16medium,),
-              CustomElevatedButton(
-                  onButtonClicked: (){
-                    Event event = Event(
-                        title: title,
-                        description: description,
-                        image: image,
-                        eventName: eventName,
-                        dateTime: dateTime,
-                        time: time)
-                    FirebaseFiles.addEventToFireStore();
-
+                            setState(() {});
+                          },
+                          child: TabEventWidget(
+                            selectedTab: selectedTab == index ? true : false,
+                            tabName: eventList[index],
+                            selectedColor: AppColors.primaryColorLight,
+                            unSelectedColor: AppColors.bglight,
+                          ),
+                        );
+                      }),
+                ),
+                Text(
+                  AppLocalizations.of(context)!.title,
+                  style: AppStyle.black16medium,
+                ),
+                SizedBox(
+                  height: height * .01,
+                ),
+                CustomTextFormField(
+                  controller: titleController,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'Please Enter Event Title';
+                    }
+                    return null;
                   },
-                  buttonColor: AppColors.blue,
-                  buttonName: AppLocalizations.of(context)!.add_event,
-                  textColor: AppColors.white,
-                  borderColor: AppColors.transparent)
-            ],
+                  borderColor: AppColors.gray,
+                  preIcon: Icons.edit_note_outlined,
+                  hintText: AppLocalizations.of(context)!.title,
+                ),
+                SizedBox(
+                  height: height * .01,
+                ),
+                Text(
+                  AppLocalizations.of(context)!.description,
+                  style: AppStyle.black16medium,
+                ),
+                SizedBox(
+                  height: height * .015,
+                ),
+                CustomTextFormField(
+                  controller: descriptionController,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'Please Enter Event Description';
+                    }
+                    return null;
+                  },
+                  borderColor: AppColors.gray,
+                  hintText: AppLocalizations.of(context)!.description,
+                  numLines: 5,
+                ),
+                SizedBox(
+                  height: height * .015,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.date_range_outlined),
+                    SizedBox(
+                      width: width * .015,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.eventDate,
+                      style: AppStyle.black16medium,
+                    ),
+                    Spacer(),
+                    InkWell(
+                        onTap: () {
+                          chooseDate();
+                          setState(() {});
+                        },
+                        child: Text(
+                          selectedDate == null
+                              ? AppLocalizations.of(context)!.chooseDate
+                              : formatedDate!,
+                          style: AppStyle.primary14bold,
+                        )),
+                  ],
+                ),
+                SizedBox(
+                  height: height * .015,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.access_time),
+                    SizedBox(
+                      width: width * .015,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.eventTime,
+                      style: AppStyle.black16medium,
+                    ),
+                    Spacer(),
+                    InkWell(
+                        onTap: () {
+                          chooseTime();
+                          setState(() {});
+                        },
+                        child: Text(
+                          selectedTime == null
+                              ? AppLocalizations.of(context)!.chooseTime
+                              : formatedTime!,
+                          style: AppStyle.primary14bold,
+                        )),
+                  ],
+                ),
+                SizedBox(
+                  height: height * .015,
+                ),
+                Text(
+                  AppLocalizations.of(context)!.location,
+                  style: AppStyle.black16medium,
+                ),
+                CustomElevatedButton(
+                    onButtonClicked: () {
+                      addEventButton();
+                      // todo:firebase logic
+                      // Event event = Event(
+                      //     title: title,
+                      //     description: description,
+                      //     image: image,
+                      //     eventName: eventName,
+                      //     dateTime: dateTime,
+                      //     time: time)
+                      // FirebaseFiles.addEventToFireStore();
+                    },
+                    buttonColor: AppColors.blue,
+                    buttonName: AppLocalizations.of(context)!.add_event,
+                    textColor: AppColors.white,
+                    borderColor: AppColors.transparent)
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+  void addEventButton(){
+    if(formKey.currentState?.validate()==true){
+
+    }
+  }
+
+  void chooseDate() async {
+    var chosenDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2035, 9, 7, 17, 30));
+    selectedDate = chosenDate;
+    formatedDate = DateFormat().add_yMd().format(selectedDate!);
+  }
+
+  void chooseTime() async {
+    var chosenTime =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    selectedTime = chosenTime;
+    formatedTime = selectedTime!.format(context);
   }
 }
