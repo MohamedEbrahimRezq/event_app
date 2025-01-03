@@ -1,13 +1,13 @@
 class Event {
   static const String collectionName = 'Event';
-  String? id;
-  String? title;
-  String? description;
-  String? image;
-  String? eventName;
-  DateTime? dateTime;
-  String? time;
-  bool? isfavorite;
+  String id;
+  String title;
+  String description;
+  String image;
+  String eventName;
+  DateTime dateTime;
+  String time;
+  bool isfavorite;
 
   Event({
     this.id = '',
@@ -22,7 +22,7 @@ class Event {
 
   Event.fromFireStore(Map<String, dynamic> data): this (
     image: data['image'] as String,
-    dateTime: DateTime.fromMillisecondsSinceEpoch(data['dateTime']),
+    dateTime: DateTime.fromMillisecondsSinceEpoch(data['dateTime']) ,
     description: data['description'] as String,
     eventName: data['eventName'] as String,
     time: data['time'],
@@ -38,7 +38,7 @@ class Event {
       'description' : description,
       'eventName' : eventName,
       'image' : image,
-      'dateTime' : dateTime?.microsecondsSinceEpoch,
+      'dateTime' : dateTime.millisecondsSinceEpoch,
       'time' : time,
       'isFavorite' : isfavorite,
 

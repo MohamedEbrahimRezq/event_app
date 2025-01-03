@@ -31,42 +31,10 @@ class LikeTab extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    EventWidget(
-                      imageBg: AssetsManager.birthdayBg,
-                      eventName: AppLocalizations.of(context)!.birthday,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.sportBg,
-                      eventName: AppLocalizations.of(context)!.sport,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.meetingBg,
-                      eventName: AppLocalizations.of(context)!.meeting,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.gamingBg,
-                      eventName: AppLocalizations.of(context)!.gaming,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.eatingBg,
-                      eventName: AppLocalizations.of(context)!.eating,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.holidayBg,
-                      eventName: AppLocalizations.of(context)!.holiday,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.exhibitionBg,
-                      eventName: AppLocalizations.of(context)!.exhibition,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.bookclubBg,
-                      eventName: AppLocalizations.of(context)!.book_club,
-                    ),
-                    EventWidget(
-                      imageBg: AssetsManager.workshopBg,
-                      eventName: AppLocalizations.of(context)!.work_shop,
-                    ),
+                    // EventWidget(
+                    //   imageBg: AssetsManager.birthdayBg,
+                    //   eventName: AppLocalizations.of(context)!.birthday,
+                    // ),
                   ],
                 ),
               ),

@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import '../../../../app_utls/app_colors.dart';
 import '../../../../app_utls/app_styles.dart';
+import '../../../../fire_base/model/events.dart';
 
 
 
 class EventWidget extends StatelessWidget {
- String imageBg;
- String eventName;
-
- EventWidget({super.key, required this.imageBg,required this.eventName});
+ Event event;
+ EventWidget({ required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class EventWidget extends StatelessWidget {
       height: height*.25,
       width: width,
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(imageBg),fit: BoxFit.fill),
+        image: DecorationImage(image: AssetImage(event.image!),fit: BoxFit.fill),
         border: Border.all(width: 2,color: AppColors.primaryColorLight),
         borderRadius: BorderRadius.circular(16),
       ),
@@ -37,12 +36,11 @@ class EventWidget extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '21',
+                  event.dateTime.day.toString(),
                   textAlign: TextAlign.center,
                   style: AppStyle.primary20bold,),
                 Text(
-                  'NOV',
-                  textAlign: TextAlign.center,
+                  event.dateTime.month.toString(),
                   style: AppStyle.primary14bold,
                 ),
               ],
@@ -60,7 +58,7 @@ class EventWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  eventName,
+                  event.eventName!,
                   textAlign: TextAlign.center,
                   style: AppStyle.primary20bold,),
                 Icon(CupertinoIcons.heart,color: AppColors.primaryColorLight,size: 30,),

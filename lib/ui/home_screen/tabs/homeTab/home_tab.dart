@@ -1,25 +1,25 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
-import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/fire_base/firebase_files.dart';
 import 'package:event_planning_app/ui/home_screen/tabs/homeTab/tab_event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../../../fire_base/model/events.dart';
 import 'event_widget.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
-
-
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
-
 class _HomeTabState extends State<HomeTab> {
   int selectedTab = 0;
+  List<Event> addedEventList = [];
   @override
   Widget build(BuildContext context) {
+    getAllEvents();
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List<String> eventList = [
@@ -119,122 +119,56 @@ class _HomeTabState extends State<HomeTab> {
                     ],
                   ),
                 ),
-                DefaultTabController(
-                    length: eventList.length,
-                    child: TabBar(
-                     onTap: (index){
-                       selectedTab=index;
-                       setState(() {
-
-                       });
-                     },
-                      labelColor: Colors.red,
-                        dividerColor: Colors.transparent,
-                        isScrollable: true,
-                        indicatorColor: Colors.transparent,
-                        labelPadding: EdgeInsets.all(5),
-                        tabs: [
-                          TabEventWidget(selectedTab:
-                          selectedTab==0
-                              ?true
-                              :false
-                              ,tabName: eventList[0],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,
-
-                          ),
-                          TabEventWidget(selectedTab:
-                          selectedTab==1
-                              ?true
-                              :false
-                              ,tabName: eventList[1],
-                            selectedColor: AppColors.white,
+                Container(
+                  margin:
+                  EdgeInsets.only(top: height * .01, bottom: height * .001),
+                  height: height * .05,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: eventList.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            selectedTab = index;
+                            setState(() {});
+                          },
+                          child: TabEventWidget(
+                            selectedTab: selectedTab == index ? true : false,
+                            tabName: eventList[index],
+                            selectedColor: AppColors.bglight,
                             unSelectedColor: AppColors.primaryColorLight,
                           ),
-                          TabEventWidget(selectedTab:
-                          selectedTab==2
-                              ?true
-                              :false
-                              ,tabName: eventList[2],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==3
-                              ?true
-                              :false
-                              ,tabName: eventList[3],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==4
-                              ?true
-                              :false
-                              ,tabName: eventList[4],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==5
-                              ?true
-                              :false
-                              ,tabName: eventList[5],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==6
-                              ?true
-                              :false
-                              ,tabName: eventList[6],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==7
-                              ?true
-                              :false
-                              ,tabName: eventList[7],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==8
-                              ?true
-                              :false
-                              ,tabName: eventList[8],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                          TabEventWidget(selectedTab:
-                          selectedTab==9
-                              ?true
-                              :false
-                              ,tabName: eventList[9],
-                            selectedColor: AppColors.white,
-                            unSelectedColor: AppColors.primaryColorLight,),
-                        ]))
+                        );
+                      }),
+                ),
               ],
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    EventWidget(imageBg: AssetsManager.birthdayBg,eventName: AppLocalizations.of(context)!.birthday,),
-                    EventWidget(imageBg: AssetsManager.sportBg,eventName: AppLocalizations.of(context)!.sport,),
-                    EventWidget(imageBg: AssetsManager.meetingBg,eventName: AppLocalizations.of(context)!.meeting,),
-                    EventWidget(imageBg: AssetsManager.gamingBg,eventName: AppLocalizations.of(context)!.gaming,),
-                    EventWidget(imageBg: AssetsManager.eatingBg,eventName: AppLocalizations.of(context)!.eating,),
-                    EventWidget(imageBg: AssetsManager.holidayBg,eventName: AppLocalizations.of(context)!.holiday,),
-                    EventWidget(imageBg: AssetsManager.exhibitionBg,eventName: AppLocalizations.of(context)!.exhibition,),
-                    EventWidget(imageBg: AssetsManager.bookclubBg,eventName: AppLocalizations.of(context)!.book_club,),
-                    EventWidget(imageBg: AssetsManager.workshopBg,eventName: AppLocalizations.of(context)!.work_shop,),
-
-                  ],
-                ),
-              ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: addedEventList.length,
+                  itemBuilder: (context, index) {
+                    return EventWidget(event: addedEventList[index],);
+                  }),
             ),
           )
 
         ],
       ),
     );
+  }
+  void getAllEvents()async{
+
+    QuerySnapshot <Event> querySnapshot = await FirebaseFiles.getEventCollection().get();
+    addedEventList = querySnapshot.docs.map(
+            (doc){
+              return doc.data();
+            })
+        .toList();
+    setState(() {
+    });
   }
 }
