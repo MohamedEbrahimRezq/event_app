@@ -4,12 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import '../../../app_utls/app_colors.dart';
 import '../../../app_utls/app_styles.dart';
+import '../../../fire_base/firebase_files.dart';
+import '../../../fire_base/model/events.dart';
 import '../../reuseable_widgets/custom_elevated_button.dart';
 import '../../reuseable_widgets/custom_text_form_feild.dart';
 import '../tabs/homeTab/tab_event_widget.dart';
 
 class CreateEvent extends StatefulWidget {
   static const String routeName = 'createEvent';
+
+  const CreateEvent({super.key});
 
   @override
   State<CreateEvent> createState() => _CreateEventState();
@@ -95,8 +99,6 @@ class _CreateEventState extends State<CreateEvent> {
                         return InkWell(
                           onTap: () {
                             selectedTab = index;
-
-
                             setState(() {});
                           },
                           child: TabEventWidget(
@@ -164,16 +166,14 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                     Spacer(),
                     InkWell(
-                        onTap: () {
-                          chooseDate();
-                          setState(() {});
-                        },
-                        child: Text(
-                          selectedDate == null
-                              ? AppLocalizations.of(context)!.chooseDate
-                              : formatedDate!,
-                          style: AppStyle.primary14bold,
-                        )),
+                      onTap: () {
+                        chooseDate();
+                      } ,
+                      child: Text(selectedDate == null
+                          ? AppLocalizations.of(context)!.chooseDate
+                          : DateFormat('dd/mm/yyyy').format(selectedDate!),
+                        style: AppStyle.primary14bold,),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -191,16 +191,15 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                     Spacer(),
                     InkWell(
-                        onTap: () {
-                          chooseTime();
-                          setState(() {});
-                        },
-                        child: Text(
-                          selectedTime == null
-                              ? AppLocalizations.of(context)!.chooseTime
-                              : formatedTime!,
-                          style: AppStyle.primary14bold,
-                        )),
+                      onTap: () {
+                           chooseTime();},
+                      child: Text(
+                        selectedTime == null
+                            ? AppLocalizations.of(context)!.chooseTime
+                            : formatedTime!,
+                        style: AppStyle.primary14bold,
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -213,15 +212,6 @@ class _CreateEventState extends State<CreateEvent> {
                 CustomElevatedButton(
                     onButtonClicked: () {
                       addEventButton();
-                      // todo:firebase logic
-                      // Event event = Event(
-                      //     title: title,
-                      //     description: description,
-                      //     image: image,
-                      //     eventName: eventName,
-                      //     dateTime: dateTime,
-                      //     time: time)
-                      // FirebaseFiles.addEventToFireStore();
                     },
                     buttonColor: AppColors.blue,
                     buttonName: AppLocalizations.of(context)!.add_event,
@@ -234,20 +224,37 @@ class _CreateEventState extends State<CreateEvent> {
       ),
     );
   }
-  void addEventButton(){
-    if(formKey.currentState?.validate()==true){
 
+  void addEventButton() {
+
+    if (formKey.currentState?.validate() == true) {
+      // todo:firebase logic
+      Event event = Event(
+          title: titleController.text,
+          description: descriptionController.text,
+          image: selectedImage,
+          eventName: selectedEventName,
+          dateTime: selectedDate!,
+          time: formatedTime!);
+      FirebaseFiles.addEventToFireStore(event)
+          .timeout(Duration(milliseconds: 500), onTimeout: () {
+      });
+      print('Event Added Successfully.');
+      Navigator.pop(context);
     }
+
   }
 
   void chooseDate() async {
+
     var chosenDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
         lastDate: DateTime(2035, 9, 7, 17, 30));
     selectedDate = chosenDate;
-    formatedDate = DateFormat().add_yMd().format(selectedDate!);
+    formatedDate = DateFormat('dd/mm/yyyy').format(selectedDate!);
+    setState(() {});
   }
 
   void chooseTime() async {
@@ -255,5 +262,6 @@ class _CreateEventState extends State<CreateEvent> {
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
     selectedTime = chosenTime;
     formatedTime = selectedTime!.format(context);
+    setState(() {});
   }
 }
