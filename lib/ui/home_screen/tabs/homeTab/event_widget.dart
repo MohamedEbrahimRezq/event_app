@@ -1,15 +1,14 @@
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import '../../../../app_utls/app_colors.dart';
+import '../../../../app_utls/app_styles.dart';
 
-import '../../app_utls/app_colors.dart';
-import '../../app_utls/app_styles.dart';
+
 
 class EventWidget extends StatelessWidget {
  String imageBg;
  String eventName;
 
- EventWidget({required this.imageBg,required this.eventName});
+ EventWidget({super.key, required this.imageBg,required this.eventName});
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,12 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/login_screen/create_account.dart';
 import 'package:flutter/material.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../home_screen/home_screen.dart';
 import '../reuseable_widgets/custom_elevated_button.dart';
+import 'create_account.dart';
 import 'forget_password.dart';
 
 class LoginScreen extends StatelessWidget {

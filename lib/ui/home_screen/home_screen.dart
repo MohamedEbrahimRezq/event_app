@@ -1,15 +1,13 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/create_event_screen/create_event.dart';
-import 'package:event_planning_app/provider/language_provider.dart';
-import 'package:event_planning_app/tabs/homeTab/home_tab.dart';
-import 'package:event_planning_app/tabs/likeTab/like_tab.dart';
-import 'package:event_planning_app/tabs/mapTab/map_tab.dart';
-import 'package:event_planning_app/tabs/profileTab/profile_tab.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/homeTab/home_tab.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/likeTab/like_tab.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/mapTab/map_tab.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/profileTab/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
-import '../provider/theme_provider.dart';
+
+import 'create_event_screen/create_event.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';
 
@@ -25,9 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var languageProvider = Provider.of<AppLanguageProvider>(context);
-    var themeProvider = Provider.of<AppThemeProvider>(context);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
           body: tabList[selectedIndex],

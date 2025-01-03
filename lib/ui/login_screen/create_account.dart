@@ -1,12 +1,12 @@
 import 'package:event_planning_app/app_utls/app_styles.dart';
-import 'package:event_planning_app/reuseable_widgets/custom_elevated_button.dart';
-import 'package:event_planning_app/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../app_utls/app_colors.dart';
-import '../app_utls/assets_manager.dart';
+import '../../app_utls/app_colors.dart';
+import '../../app_utls/assets_manager.dart';
+import '../reuseable_widgets/custom_elevated_button.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
 import '../home_screen/home_screen.dart';
+import 'login_screen.dart';
 
 class CreateAccount extends StatelessWidget {
   static const String routeName = 'register';

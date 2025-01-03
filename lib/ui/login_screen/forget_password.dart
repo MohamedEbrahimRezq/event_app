@@ -1,12 +1,11 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/login_screen/create_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../app_utls/app_colors.dart';
-import '../app_utls/app_styles.dart';
+import '../../app_utls/app_colors.dart';
+import '../../app_utls/app_styles.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
 import '../reuseable_widgets/custom_elevated_button.dart';
+import 'create_account.dart';
 
 class ForgetPassword extends StatelessWidget {
   static const String routeName = 'forgetPassword';

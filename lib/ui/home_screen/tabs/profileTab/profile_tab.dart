@@ -1,13 +1,13 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/login_screen/login_screen.dart';
-import 'package:event_planning_app/tabs/profileTab/theme_sheet.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/profileTab/theme_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import '../../provider/theme_provider.dart';
+import '../../../../provider/theme_provider.dart';
+import '../../../login_screen/login_screen.dart';
 import 'language_sheet.dart';
 
 class ProfileTab extends StatefulWidget {
