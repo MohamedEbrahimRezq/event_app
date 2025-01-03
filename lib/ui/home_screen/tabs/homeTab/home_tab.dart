@@ -1,12 +1,11 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
-import 'package:event_planning_app/fire_base/firebase_files.dart';
+import 'package:event_planning_app/provider/event_list_provider.dart';
 import 'package:event_planning_app/ui/home_screen/tabs/homeTab/tab_event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../../fire_base/model/events.dart';
+import 'package:provider/provider.dart';
 import 'event_widget.dart';
 
 class HomeTab extends StatefulWidget {
@@ -15,25 +14,16 @@ class HomeTab extends StatefulWidget {
   State<HomeTab> createState() => _HomeTabState();
 }
 class _HomeTabState extends State<HomeTab> {
-  int selectedTab = 0;
-  List<Event> addedEventList = [];
+ late EventListProvider eventListProvider;
   @override
   Widget build(BuildContext context) {
-    getAllEvents();
+    eventListProvider = Provider.of<EventListProvider>(context);
+    if(eventListProvider.addedEventList.isEmpty) {
+      eventListProvider.getAllEvents();
+    }
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    List<String> eventList = [
-      AppLocalizations.of(context)!.all,
-      AppLocalizations.of(context)!.sport,
-      AppLocalizations.of(context)!.birthday,
-      AppLocalizations.of(context)!.meeting,
-      AppLocalizations.of(context)!.gaming,
-      AppLocalizations.of(context)!.eating,
-      AppLocalizations.of(context)!.holiday,
-      AppLocalizations.of(context)!.exhibition,
-      AppLocalizations.of(context)!.book_club,
-      AppLocalizations.of(context)!.work_shop,
-    ];
+
     return Scaffold(
       body: Column(
         children: [
@@ -125,16 +115,16 @@ class _HomeTabState extends State<HomeTab> {
                   height: height * .05,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: eventList.length,
+                      itemCount: eventListProvider.eventList.length,
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            selectedTab = index;
+                            eventListProvider.changeSelectedTab(index) ;
                             setState(() {});
                           },
                           child: TabEventWidget(
-                            selectedTab: selectedTab == index ? true : false,
-                            tabName: eventList[index],
+                            selectedTab: eventListProvider.selectedTab == index ? true : false,
+                            tabName: eventListProvider.eventList[index],
                             selectedColor: AppColors.bglight,
                             unSelectedColor: AppColors.primaryColorLight,
                           ),
@@ -144,15 +134,18 @@ class _HomeTabState extends State<HomeTab> {
               ],
             ),
           ),
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
+              child: eventListProvider.filteredEventList.isEmpty?
+              Center(child: Text('No Event Added Yet.',style: AppStyle.black16medium,),):
+              ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: addedEventList.length,
+                  itemCount: eventListProvider.filteredEventList.length,
                   itemBuilder: (context, index) {
-                    return EventWidget(event: addedEventList[index],);
-                  }),
+                    return EventWidget(event: eventListProvider.filteredEventList[index],);
+                  })
             ),
           )
 
@@ -160,15 +153,8 @@ class _HomeTabState extends State<HomeTab> {
       ),
     );
   }
-  void getAllEvents()async{
 
-    QuerySnapshot <Event> querySnapshot = await FirebaseFiles.getEventCollection().get();
-    addedEventList = querySnapshot.docs.map(
-            (doc){
-              return doc.data();
-            })
-        .toList();
-    setState(() {
-    });
+  void emptyAllEvents(){
+
   }
 }

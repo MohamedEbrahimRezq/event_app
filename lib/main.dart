@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning_app/app_utls/app_theme.dart';
+import 'package:event_planning_app/provider/event_list_provider.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
 import 'package:event_planning_app/provider/theme_provider.dart';
 import 'package:event_planning_app/ui/home_screen/create_event_screen/create_event.dart';
@@ -21,7 +22,8 @@ void main() async{
   await FirebaseFirestore.instance.disableNetwork();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
-    ChangeNotifierProvider(create: (context) => AppThemeProvider())
+    ChangeNotifierProvider(create: (context) => AppThemeProvider()),
+    ChangeNotifierProvider(create: (context) => EventListProvider())
   ], child: const MyApp()));
 }
 
