@@ -2,10 +2,12 @@ import 'package:event_planning_app/app_utls/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../../app_utls/app_colors.dart';
 import '../../../app_utls/app_styles.dart';
 import '../../../fire_base/firebase_files.dart';
 import '../../../fire_base/model/events.dart';
+import '../../../provider/event_list_provider.dart';
 import '../../reuseable_widgets/custom_elevated_button.dart';
 import '../../reuseable_widgets/custom_text_form_feild.dart';
 import '../tabs/homeTab/tab_event_widget.dart';
@@ -30,9 +32,10 @@ class _CreateEventState extends State<CreateEvent> {
   String? formatedTime;
   String selectedImage = '';
   String selectedEventName = '';
-
+  late EventListProvider eventListProvider;
   @override
   Widget build(BuildContext context) {
+    eventListProvider = Provider.of<EventListProvider>(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List<String> eventList = [
@@ -171,7 +174,7 @@ class _CreateEventState extends State<CreateEvent> {
                       } ,
                       child: Text(selectedDate == null
                           ? AppLocalizations.of(context)!.chooseDate
-                          : DateFormat('dd/mm/yyyy').format(selectedDate!),
+                          : DateFormat('dd/MM/yyyy').format(selectedDate!),
                         style: AppStyle.primary14bold,),
                     ),
                   ],
@@ -240,6 +243,7 @@ class _CreateEventState extends State<CreateEvent> {
           .timeout(Duration(milliseconds: 500), onTimeout: () {
       });
       print('Event Added Successfully.');
+      eventListProvider.getAllEvents();
       Navigator.pop(context);
     }
 
