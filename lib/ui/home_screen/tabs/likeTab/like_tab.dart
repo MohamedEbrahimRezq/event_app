@@ -1,10 +1,7 @@
-import 'package:event_planning_app/reuseable_widgets/custom_text_form_feild.dart';
 import 'package:flutter/material.dart';
-
-
-import '../../app_utls/app_colors.dart';
-import '../../app_utls/assets_manager.dart';
-
+import '../../../../app_utls/app_colors.dart';
+import '../../../../app_utls/assets_manager.dart';
+import '../../../reuseable_widgets/custom_text_form_feild.dart';
 import '../homeTab/event_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

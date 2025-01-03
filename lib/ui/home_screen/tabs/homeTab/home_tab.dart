@@ -2,12 +2,15 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/tabs/homeTab/event_widget.dart';
-import 'package:event_planning_app/tabs/homeTab/tab_event_widget.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/homeTab/tab_event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'event_widget.dart';
+
 class HomeTab extends StatefulWidget {
+  const HomeTab({super.key});
+
 
   @override
   State<HomeTab> createState() => _HomeTabState();

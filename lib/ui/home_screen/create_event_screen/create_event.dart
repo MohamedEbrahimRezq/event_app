@@ -1,11 +1,11 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
-import 'package:event_planning_app/reuseable_widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import '../app_utls/app_colors.dart';
-import '../app_utls/app_styles.dart';
-import '../reuseable_widgets/custom_text_form_feild.dart';
+import '../../../app_utls/app_colors.dart';
+import '../../../app_utls/app_styles.dart';
+import '../../reuseable_widgets/custom_elevated_button.dart';
+import '../../reuseable_widgets/custom_text_form_feild.dart';
 import '../tabs/homeTab/tab_event_widget.dart';
 
 class CreateEvent extends StatefulWidget {
