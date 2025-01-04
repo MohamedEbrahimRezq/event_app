@@ -33,6 +33,7 @@ class _CreateEventState extends State<CreateEvent> {
   String selectedImage = '';
   String selectedEventName = '';
   late EventListProvider eventListProvider;
+
   @override
   Widget build(BuildContext context) {
     eventListProvider = Provider.of<EventListProvider>(context);
@@ -171,11 +172,13 @@ class _CreateEventState extends State<CreateEvent> {
                     InkWell(
                       onTap: () {
                         chooseDate();
-                      } ,
-                      child: Text(selectedDate == null
-                          ? AppLocalizations.of(context)!.chooseDate
-                          : DateFormat('dd/MM/yyyy').format(selectedDate!),
-                        style: AppStyle.primary14bold,),
+                      },
+                      child: Text(
+                        selectedDate == null
+                            ? AppLocalizations.of(context)!.chooseDate
+                            : DateFormat('dd/MM/yyyy').format(selectedDate!),
+                        style: AppStyle.primary14bold,
+                      ),
                     ),
                   ],
                 ),
@@ -195,7 +198,8 @@ class _CreateEventState extends State<CreateEvent> {
                     Spacer(),
                     InkWell(
                       onTap: () {
-                           chooseTime();},
+                        chooseTime();
+                      },
                       child: Text(
                         selectedTime == null
                             ? AppLocalizations.of(context)!.chooseTime
@@ -229,7 +233,6 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   void addEventButton() {
-
     if (formKey.currentState?.validate() == true) {
       // todo:firebase logic
       Event event = Event(
@@ -240,17 +243,14 @@ class _CreateEventState extends State<CreateEvent> {
           dateTime: selectedDate!,
           time: formatedTime!);
       FirebaseFiles.addEventToFireStore(event)
-          .timeout(Duration(milliseconds: 500), onTimeout: () {
-      });
+          .timeout(Duration(milliseconds: 500), onTimeout: () {});
       print('Event Added Successfully.');
       eventListProvider.getAllEvents();
       Navigator.pop(context);
     }
-
   }
 
   void chooseDate() async {
-
     var chosenDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
