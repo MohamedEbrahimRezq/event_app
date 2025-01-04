@@ -1,14 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '../../../../app_utls/app_colors.dart';
 import '../../../../app_utls/app_styles.dart';
 import '../../../../fire_base/model/events.dart';
 
+class EventWidget extends StatefulWidget {
+  Event event;
 
+  EventWidget({required this.event});
 
-class EventWidget extends StatelessWidget {
- Event event;
- EventWidget({ required this.event});
+  @override
+  State<EventWidget> createState() => _EventWidgetState();
+}
 
+class _EventWidgetState extends State<EventWidget> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -16,11 +21,12 @@ class EventWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.all(5),
-      height: height*.25,
+      height: height * .25,
       width: width,
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(event.image!),fit: BoxFit.fill),
-        border: Border.all(width: 2,color: AppColors.primaryColorLight),
+        image:
+            DecorationImage(image: AssetImage(widget.event.image!), fit: BoxFit.fill),
+        border: Border.all(width: 2, color: AppColors.primaryColorLight),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -36,17 +42,17 @@ class EventWidget extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  event.dateTime.day.toString(),
+                  widget.event.dateTime.day.toString(),
                   textAlign: TextAlign.center,
-                  style: AppStyle.primary20bold,),
+                  style: AppStyle.primary20bold,
+                ),
                 Text(
-                  event.dateTime.month.toString(),
+                  widget.event.dateTime.month.toString(),
                   style: AppStyle.primary14bold,
                 ),
               ],
             ),
           ),
-
           Container(
             margin: EdgeInsets.only(bottom: 5),
             padding: EdgeInsets.all(10),
@@ -58,10 +64,28 @@ class EventWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  event.eventName!,
+                  widget.event.eventName,
                   textAlign: TextAlign.center,
-                  style: AppStyle.primary20bold,),
-                Icon(CupertinoIcons.heart,color: AppColors.primaryColorLight,size: 30,),
+                  style: AppStyle.primary20bold,
+                ),
+                InkWell(
+                  onTap: (){
+                    if(widget.event.isfavorite == false){
+                    widget.event.isfavorite=true;
+                    }else{
+                      widget.event.isfavorite=false;
+                    }
+                    setState(() {
+
+                    });
+                  },
+                  child:
+                  Icon(
+                    CupertinoIcons.heart,
+                    color: AppColors.primaryColorLight,
+                    size: 30,
+                  ),
+                ),
               ],
             ),
           ),

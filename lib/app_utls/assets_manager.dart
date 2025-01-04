@@ -10,7 +10,8 @@ class AssetsManager {
   static const String iconHomeSelected = "assets/images/selected_home_tab.png";
   static const String iconMapSelected = "assets/images/selected_map_tab.png";
   static const String iconLikeSelected = "assets/images/selected_like_tab.png";
-  static const String iconProfileSelected = "assets/images/selected_profile_tab.png";
+  static const String iconProfileSelected =
+      "assets/images/selected_profile_tab.png";
   static const String birthdayBg = "assets/images/birthdayBg.png";
   static const String bookclubBg = "assets/images/bookclubBg.png";
   static const String eatingBg = "assets/images/eatingBg.png";
