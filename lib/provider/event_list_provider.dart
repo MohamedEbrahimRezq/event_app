@@ -1,16 +1,15 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../fire_base/firebase_files.dart';
 import '../fire_base/model/events.dart';
 
-class EventListProvider extends ChangeNotifier{
+class EventListProvider extends ChangeNotifier {
   int selectedTab = 0;
   List<Event> addedEventList = [];
   List<Event> filteredEventList = [];
   List<String> eventList = [
     'All',
-   'Sport',
+    'Sport',
     'Birthday',
     'Meeting',
     'Gaming',
@@ -22,36 +21,33 @@ class EventListProvider extends ChangeNotifier{
   ];
 
   void getAllEvents() async {
-    print('first add all events');
     QuerySnapshot<Event> querySnapshot =
-    await FirebaseFiles.getEventCollection().get();
+        await FirebaseFiles.getEventCollection().get();
     addedEventList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
-    filteredEventList=addedEventList;
+    filteredEventList = addedEventList;
     notifyListeners();
   }
+
   void getFilteredEvents() async {
     QuerySnapshot<Event> querySnapshot =
-    await FirebaseFiles.getEventCollection().get();
+        await FirebaseFiles.getEventCollection().get();
     addedEventList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
-  filteredEventList= addedEventList.where(
-       (event){
-        return event.eventName==eventList[selectedTab];
-       }
-   ).toList();
-
+    filteredEventList = addedEventList.where((event) {
+      return event.eventName == eventList[selectedTab];
+    }).toList();
     notifyListeners();
   }
-  void changeSelectedTab(int newSelectedTab){
-    selectedTab=newSelectedTab;
-    if(selectedTab==0) {
+
+  void changeSelectedTab(int newSelectedTab) {
+    selectedTab = newSelectedTab;
+    if (selectedTab == 0) {
       getAllEvents();
-    }else {
+    } else {
       getFilteredEvents();
     }
   }
-
 }
