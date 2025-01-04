@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../../app_utls/app_colors.dart';
 import '../../../../app_utls/app_styles.dart';
 import '../../../../fire_base/model/events.dart';
@@ -24,8 +25,8 @@ class _EventWidgetState extends State<EventWidget> {
       height: height * .25,
       width: width,
       decoration: BoxDecoration(
-        image:
-            DecorationImage(image: AssetImage(widget.event.image!), fit: BoxFit.fill),
+        image: DecorationImage(
+            image: AssetImage(widget.event.image), fit: BoxFit.fill),
         border: Border.all(width: 2, color: AppColors.primaryColorLight),
         borderRadius: BorderRadius.circular(16),
       ),
@@ -47,7 +48,7 @@ class _EventWidgetState extends State<EventWidget> {
                   style: AppStyle.primary20bold,
                 ),
                 Text(
-                  widget.event.dateTime.month.toString(),
+                  DateFormat('MMM').format( widget.event.dateTime),
                   style: AppStyle.primary14bold,
                 ),
               ],
@@ -69,19 +70,19 @@ class _EventWidgetState extends State<EventWidget> {
                   style: AppStyle.primary20bold,
                 ),
                 InkWell(
-                  onTap: (){
-                    if(widget.event.isfavorite == false){
-                    widget.event.isfavorite=true;
-                    }else{
-                      widget.event.isfavorite=false;
+                  onTap: () {
+                    if (widget.event.isfavorite == false) {
+                      widget.event.isfavorite = true;
+                      print('is favorite');
+                    } else {
+                      widget.event.isfavorite = false;
+                      print('not favorite');
                     }
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
-                  child:
-                  Icon(
-                    CupertinoIcons.heart,
+                  child: Icon(  widget.event.isfavorite == true
+                      ? CupertinoIcons.heart_fill
+                      : CupertinoIcons.heart,
                     color: AppColors.primaryColorLight,
                     size: 30,
                   ),

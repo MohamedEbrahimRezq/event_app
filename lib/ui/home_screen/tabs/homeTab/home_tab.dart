@@ -20,6 +20,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     eventListProvider = Provider.of<EventListProvider>(context);
+    eventListProvider.getEventNameList(context);
     if (eventListProvider.addedEventList.isEmpty) {
       eventListProvider.getAllEvents();
     }

@@ -1,3 +1,6 @@
+
+
+
 class Event {
   static const String collectionName = 'Event';
   String id;
