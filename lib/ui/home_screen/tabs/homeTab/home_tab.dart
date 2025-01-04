@@ -1,4 +1,3 @@
-
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/provider/event_list_provider.dart';
@@ -10,15 +9,18 @@ import 'event_widget.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
+
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
+
 class _HomeTabState extends State<HomeTab> {
- late EventListProvider eventListProvider;
+  late EventListProvider eventListProvider;
+
   @override
   Widget build(BuildContext context) {
     eventListProvider = Provider.of<EventListProvider>(context);
-    if(eventListProvider.addedEventList.isEmpty) {
+    if (eventListProvider.addedEventList.isEmpty) {
       eventListProvider.getAllEvents();
     }
     var height = MediaQuery.of(context).size.height;
@@ -111,7 +113,7 @@ class _HomeTabState extends State<HomeTab> {
                 ),
                 Container(
                   margin:
-                  EdgeInsets.only(top: height * .01, bottom: height * .001),
+                      EdgeInsets.only(top: height * .01, bottom: height * .001),
                   height: height * .05,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -119,11 +121,13 @@ class _HomeTabState extends State<HomeTab> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            eventListProvider.changeSelectedTab(index) ;
+                            eventListProvider.changeSelectedTab(index);
                             setState(() {});
                           },
                           child: TabEventWidget(
-                            selectedTab: eventListProvider.selectedTab == index ? true : false,
+                            selectedTab: eventListProvider.selectedTab == index
+                                ? true
+                                : false,
                             tabName: eventListProvider.eventList[index],
                             selectedColor: AppColors.bglight,
                             unSelectedColor: AppColors.primaryColorLight,
@@ -137,24 +141,27 @@ class _HomeTabState extends State<HomeTab> {
 
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: eventListProvider.filteredEventList.isEmpty?
-              Center(child: Text('No Event Added Yet.',style: AppStyle.black16medium,),):
-              ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: eventListProvider.filteredEventList.length,
-                  itemBuilder: (context, index) {
-                    return EventWidget(event: eventListProvider.filteredEventList[index],);
-                  })
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: eventListProvider.filteredEventList.isEmpty
+                    ? Center(
+                        child: Text(
+                          'No Event Added Yet.',
+                          style: AppStyle.black16medium,
+                        ),
+                      )
+                    : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: eventListProvider.filteredEventList.length,
+                        itemBuilder: (context, index) {
+                          return EventWidget(
+                            event: eventListProvider.filteredEventList[index],
+                          );
+                        })),
           )
-
         ],
       ),
     );
   }
 
-  void emptyAllEvents(){
-
-  }
+  void emptyAllEvents() {}
 }
