@@ -6,12 +6,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventListProvider extends ChangeNotifier {
   int selectedTab = 0;
+  bool isFavorite = false;
   List<Event> addedEventList = [];
   List<Event> filteredEventList = [];
+  List<Event> filteredFavoriteEventList = [];
   List<String> eventList = [];
 
-  void getEventNameList(BuildContext context){
-
+  void getEventNameList(BuildContext context) {
     eventList = [
       AppLocalizations.of(context)!.all,
       AppLocalizations.of(context)!.sport,
@@ -26,10 +27,11 @@ class EventListProvider extends ChangeNotifier {
     ];
   }
 
-
   void getAllEvents() async {
     QuerySnapshot<Event> querySnapshot =
-        await FirebaseFiles.getEventCollection().get();
+        await FirebaseFiles.getEventCollection()
+            .orderBy('dateTime', descending: false)
+            .get();
     addedEventList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
@@ -40,13 +42,16 @@ class EventListProvider extends ChangeNotifier {
   void getFilteredEvents() async {
     getEventNameList;
     QuerySnapshot<Event> querySnapshot =
-        await FirebaseFiles.getEventCollection().get();
+        await FirebaseFiles.getEventCollection()
+            .orderBy('dateTime', descending: false)
+            .get();
     addedEventList = querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
     filteredEventList = addedEventList.where((event) {
       return event.eventName == eventList[selectedTab];
     }).toList();
+    // todo : sort
     notifyListeners();
   }
 
@@ -58,4 +63,30 @@ class EventListProvider extends ChangeNotifier {
       getFilteredEvents();
     }
   }
+
+  void updateFavoriteEvents(Event event) async {
+    FirebaseFiles.getEventCollection()
+        .doc(event.id)
+        .update({'isFavorite': !event.isfavorite}).timeout(
+            Duration(milliseconds: 500), onTimeout: () {
+      print('Event added to Favorite');
+    });
+    selectedTab == 0 ? getAllEvents() : getFilteredEvents();
+    getFavoriteEvents();
+    notifyListeners();
+  }
+
+
+  void getFavoriteEvents() async {
+    var querySnapshot = await FirebaseFiles.getEventCollection()
+        .orderBy('dateTime', descending: false)
+        .where('isFavorite', isEqualTo: true)
+        .get();
+    filteredFavoriteEventList = querySnapshot.docs.map((doc) {
+      return doc.data();
+    }).toList();
+  }
+
+
+
 }
