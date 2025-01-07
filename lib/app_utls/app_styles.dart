@@ -10,6 +10,8 @@ class AppStyle {
       fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.white);
   static const TextStyle white16medium = TextStyle(
       fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.white);
+  static const TextStyle blue16medium = TextStyle(
+      fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.blue);
   static const TextStyle black16medium = TextStyle(
       fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.black);
   static const TextStyle white20medium = TextStyle(
@@ -24,6 +26,8 @@ class AppStyle {
       color: AppColors.primaryColorLight);
   static const TextStyle white24bold = TextStyle(
       fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.white);
+  static const TextStyle blue24bold = TextStyle(
+      fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.blue);
   static const TextStyle primary20bold = TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
