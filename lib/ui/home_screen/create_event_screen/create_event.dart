@@ -216,6 +216,23 @@ class _CreateEventState extends State<CreateEvent> {
                   AppLocalizations.of(context)!.location,
                   style: AppStyle.black16medium,
                 ),
+                SizedBox(
+                  height: height * .015,
+                ),
+                CustomElevatedButton(
+                    onButtonClicked: () {
+                    },
+                    preIcon: AssetsManager.locationIcon,
+                    buttonColor: AppColors.bglight,
+                    buttonName: AppLocalizations.of(context)!.location,
+                    textColor: AppColors.blue,
+                    borderColor: AppColors.blue,
+                    afterIcon: AssetsManager.arrow_icon,
+
+                ),
+                SizedBox(
+                  height: height * .015,
+                ),
                 CustomElevatedButton(
                     onButtonClicked: () {
                       addEventButton();

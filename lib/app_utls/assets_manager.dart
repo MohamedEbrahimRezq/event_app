@@ -25,4 +25,6 @@ class AssetsManager {
   static const String logo = "assets/images/Logo.png";
   static const String googleIcon = "assets/images/iconGoogle.png";
   static const String forgetPassword = "assets/images/forgetpass.png";
+  static const String locationIcon = "assets/images/location_image.png";
+  static const String arrow_icon = "assets/images/arrow_icon.png";
 }
