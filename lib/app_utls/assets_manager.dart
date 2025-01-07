@@ -27,4 +27,7 @@ class AssetsManager {
   static const String forgetPassword = "assets/images/forgetpass.png";
   static const String locationIcon = "assets/images/location_image.png";
   static const String arrow_icon = "assets/images/arrow_icon.png";
+  static const String edite_icon = "assets/images/EditIcon.png";
+  static const String delete_icon = "assets/images/deleteIcon.png";
+  static const String date_Icon = "assets/images/dateIcon.png";
 }

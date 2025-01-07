@@ -45,5 +45,6 @@
   "eventTime": "وقت الحدث",
   "chooseDate": "اختر التاريخ",
   "chooseTime": "اختر الوقت",
-  "location": "الموقع الجغرافى"
+  "location": "الموقع الجغرافى",
+  "eventDetails": "تفاصيل الحدث"
 }

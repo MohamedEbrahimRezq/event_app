@@ -4,6 +4,7 @@ import 'package:event_planning_app/provider/event_list_provider.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
 import 'package:event_planning_app/provider/theme_provider.dart';
 import 'package:event_planning_app/ui/home_screen/create_event_screen/create_event.dart';
+import 'package:event_planning_app/ui/home_screen/edite_event_widget.dart';
 import 'package:event_planning_app/ui/home_screen/home_screen.dart';
 import 'package:event_planning_app/ui/login_screen/create_account.dart';
 import 'package:event_planning_app/ui/login_screen/forget_password.dart';
@@ -36,13 +37,14 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginScreen.routeName,
+      initialRoute: EditeEventWidget.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         CreateAccount.routeName: (context) => CreateAccount(),
         ForgetPassword.routeName: (context) => ForgetPassword(),
         CreateEvent.routeName: (context) => CreateEvent(),
+        EditeEventWidget.routeName: (context) => EditeEventWidget(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
