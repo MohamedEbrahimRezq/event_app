@@ -134,6 +134,10 @@ class EditeEventWidget extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.description,
                 style: AppStyle.black16medium,
+
+
+
+
               ),
 
             ],
