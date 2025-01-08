@@ -72,7 +72,7 @@ class EditeEventWidget extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.all(8),
-                height: height * .08,
+                height: height * .09,
                 width: width,
                 decoration: BoxDecoration(
                   border:
@@ -86,8 +86,8 @@ class EditeEventWidget extends StatelessWidget {
                     SizedBox(width: width*.02,),
                     Column(
                       children: [
-                        Text('Date',style: AppStyle.blue16medium,),
-                        Text('Time',style: AppStyle.black16medium,),
+                        Text(AppLocalizations.of(context)!.date,style: AppStyle.blue16medium,),
+                        Text(AppLocalizations.of(context)!.time,style: AppStyle.blue16medium,),
                       ],
                     )
                   ],
