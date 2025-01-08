@@ -1,7 +1,7 @@
 /* todo :
- 1- favorite events add in favorite Screen   todo: done
+ 1- favorite events add in favorite Screen                todo: done
  2- handle the map of fire store by localization
- 2- sorting all events
+ 2- sorting all events                                    todo: done
  4- authentication by fire store and google
  5- shared preference
  6- edit event details
