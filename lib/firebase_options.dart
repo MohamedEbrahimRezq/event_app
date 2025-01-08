@@ -47,29 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBAWWK1TEV_sDcUcP6MquWttjDx95bo4Ow',
-    appId: '1:24133248133:android:af05df55861e5abc81f5ec',
-    messagingSenderId: '24133248133',
-    projectId: 'event-app-e1339',
-    storageBucket: 'event-app-e1339.firebasestorage.app',
+    apiKey: 'AIzaSyBtCHhPzZBaNcPZB4vbwUqal_ieMz928OY',
+    appId: '1:1095055850185:android:804c888391e839a76cab18',
+    messagingSenderId: '1095055850185',
+    projectId: 'event-planning-3c2fd',
+    storageBucket: 'event-planning-3c2fd.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDaSEQQitkgkpEo3_ApHPzHyfwkfZ8nNJA',
-    appId: '1:24133248133:ios:896018e6131a612c81f5ec',
-    messagingSenderId: '24133248133',
-    projectId: 'event-app-e1339',
-    storageBucket: 'event-app-e1339.firebasestorage.app',
+    apiKey: 'AIzaSyBwVSDwF2A-zpso1PWFJsLIWIRgLW15wSU',
+    appId: '1:1095055850185:ios:0841c01e07304d0e6cab18',
+    messagingSenderId: '1095055850185',
+    projectId: 'event-planning-3c2fd',
+    storageBucket: 'event-planning-3c2fd.firebasestorage.app',
     iosBundleId: 'com.example.eventPlanningApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAIGvyYXNpuh-o0fMwMKK6lM9okvrlwm00',
-    appId: '1:24133248133:web:3487bee3fb93fbf281f5ec',
-    messagingSenderId: '24133248133',
-    projectId: 'event-app-e1339',
-    authDomain: 'event-app-e1339.firebaseapp.com',
-    storageBucket: 'event-app-e1339.firebasestorage.app',
-    measurementId: 'G-ZLXVFLSMQ9',
+    apiKey: 'AIzaSyC_3JQFYef4r9yFGtwkEETseLBjPhdDav0',
+    appId: '1:1095055850185:web:bcb15d77ad6c35626cab18',
+    messagingSenderId: '1095055850185',
+    projectId: 'event-planning-3c2fd',
+    authDomain: 'event-planning-3c2fd.firebaseapp.com',
+    storageBucket: 'event-planning-3c2fd.firebasestorage.app',
+    measurementId: 'G-Q89MX6FL33',
   );
 }
