@@ -49,5 +49,7 @@
   "chooseTime": "Choose Time",
   "eventTime": "Event Time",
   "location": "Location",
-  "eventDetails": "Event Details"
+  "eventDetails": "Event Details",
+  "editeEvent": "Edite Event",
+  "updateEvent": "Update Event"
 }

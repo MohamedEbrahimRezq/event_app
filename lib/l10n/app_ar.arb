@@ -48,5 +48,7 @@
   "chooseDate": "اختر التاريخ",
   "chooseTime": "اختر الوقت",
   "location": "الموقع الجغرافى",
-  "eventDetails": "تفاصيل الحدث"
+  "eventDetails": "تفاصيل الحدث",
+  "editeEvent": "تعديل الحدث",
+  "updateEvent": "تحديث الحدث"
 }

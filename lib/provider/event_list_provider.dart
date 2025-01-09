@@ -90,7 +90,13 @@ class EventListProvider extends ChangeNotifier {
   void deleteEvent(Event event){
     FirebaseFiles.getEventCollection()
         .doc(event.id)
-        .delete();
+        .delete()
+        .then((value) => print("Event Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
+
+    notifyListeners();
+
+
   }
 
 
