@@ -18,7 +18,9 @@ EventWidget({required this.event});
     var width = MediaQuery.of(context).size.width;
     return InkWell(
       onLongPress: (){
-        Navigator.pushNamed(context, EditeEventWidget.routeName);
+        Navigator.pushNamed(context, EditeEventWidget.routeName,
+            arguments: event
+        );
       },
       child: Container(
         padding: EdgeInsets.all(5),

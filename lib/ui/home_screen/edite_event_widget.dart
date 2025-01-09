@@ -1,4 +1,5 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/ui/home_screen/tabs/homeTab/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../app_utls/app_colors.dart';
@@ -12,6 +13,7 @@ class EditeEventWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EventWidget args = ModalRoute.of(context)?.settings.arguments as EventWidget ;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(

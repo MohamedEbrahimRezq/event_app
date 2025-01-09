@@ -87,6 +87,12 @@ class EventListProvider extends ChangeNotifier {
     }).toList();
   }
 
+  void deleteEvent(Event event){
+    FirebaseFiles.getEventCollection()
+        .doc(event.id)
+        .delete();
+  }
+
 
 
 }
