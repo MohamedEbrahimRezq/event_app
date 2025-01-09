@@ -6,7 +6,7 @@ import '../../../../app_utls/app_colors.dart';
 import '../../../../app_utls/app_styles.dart';
 import '../../../../fire_base/model/events.dart';
 import '../../../../provider/event_list_provider.dart';
-import '../../edite_event_widget.dart';
+import '../../event_details_widget.dart';
 
 class EventWidget extends StatelessWidget {
 Event event;
@@ -18,8 +18,8 @@ EventWidget({required this.event});
     var width = MediaQuery.of(context).size.width;
     return InkWell(
       onLongPress: (){
-        Navigator.pushNamed(context, EditeEventWidget.routeName,
-            arguments: event
+        Navigator.of(context).pushNamed(EventDetailsWidget.routeName,
+            arguments: EventWidget(event: event)
         );
       },
       child: Container(
