@@ -12,7 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   MyValidator? validator;
   TextEditingController? controller;
 
-  CustomTextFormField({super.key,
+  CustomTextFormField({
     required this.borderColor,
     this.controller,
     this.preIcon,
@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: validator,
+      controller: controller,
       onTap: (){},
       maxLines: numLines,
       style: AppStyle.primary14bold.copyWith(

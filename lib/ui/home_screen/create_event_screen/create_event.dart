@@ -10,6 +10,7 @@ import '../../../fire_base/model/events.dart';
 import '../../../provider/event_list_provider.dart';
 import '../../reuseable_widgets/custom_elevated_button.dart';
 import '../../reuseable_widgets/custom_text_form_feild.dart';
+import '../home_screen.dart';
 import '../tabs/homeTab/tab_event_widget.dart';
 
 class CreateEvent extends StatefulWidget {
@@ -127,7 +128,7 @@ class _CreateEventState extends State<CreateEvent> {
                     if (text == null || text.isEmpty) {
                       return 'Please Enter Event Title';
                     }
-                    return null;
+                    return null ;
                   },
                   borderColor: AppColors.gray,
                   preIcon: Icons.edit_note_outlined,
@@ -263,7 +264,7 @@ class _CreateEventState extends State<CreateEvent> {
           .timeout(Duration(milliseconds: 500), onTimeout: () {});
       print('Event Added Successfully.');
       eventListProvider.getAllEvents();
-      Navigator.pop(context);
+      Navigator.pushNamed(context, HomeScreen.routeName);
     }
   }
 
