@@ -264,7 +264,7 @@ class _CreateEventState extends State<CreateEvent> {
           .timeout(Duration(milliseconds: 500), onTimeout: () {});
       print('Event Added Successfully.');
       eventListProvider.getAllEvents();
-      Navigator.pushNamed(context, HomeScreen.routeName);
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }
 
