@@ -1,6 +1,7 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/ui/reuseable_widgets/alert_dialoge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
@@ -14,8 +15,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = 'loginScreen';
-  var emailController = TextEditingController(text: "Mohamed@sasa.com");
-  var passwordController = TextEditingController(text: "123456");
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
 
@@ -106,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 CustomElevatedButton(
                   onButtonClicked: (){
-                    login();
+                    login(context);
                   },
                   buttonColor: AppColors.primaryColorLight,
                   buttonName: AppLocalizations.of(context)!.login,
@@ -153,7 +154,8 @@ class LoginScreen extends StatelessWidget {
                 CustomElevatedButton(
                   onButtonClicked: (){
                     //todo : sign in with google
-
+                    signInWithGoogle();
+                    //googleSignInMethod();
                   },
                   textColor: AppColors.primaryColorLight,
                   buttonColor: Theme.of(context).primaryColorLight,
@@ -169,10 +171,64 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void login() {
+  void login(BuildContext context) async {
     if (formKey.currentState?.validate() == true){
-
+      DialogAlert.showLoading(context: context, message: "Loading...");
+      try {
+        final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
+        //print('Login successfully');
+        DialogAlert.hideLoading(context);
+        DialogAlert.showMessage(context: context, message: 'Login successfully', posActionName: 'ok', posAction: (){
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        });
+      }
+      catch (e) {
+        DialogAlert.hideLoading(context);
+        DialogAlert.showMessage(context: context, message: e.toString());
+        print(e.toString());
+      }
     }
   }
+
+  Future<UserCredential> signInWithGoogle() async{
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> googleSignInMethod() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final userCredential = await _auth.signInWithCredential(credential);
+      final user = userCredential.user;
+      // Navigate or perform other actions with the signed-in user
+    } on FirebaseAuthException catch (e) {
+      print('Error signing in with Google: $e');
+    }
+}
+
 }
 
