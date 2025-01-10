@@ -16,41 +16,44 @@ import 'home_screen.dart';
 
 class EditeEventWidget extends StatefulWidget {
   static const String routeName = 'editeEvent';
-  const EditeEventWidget({super.key});
 
   @override
   State<EditeEventWidget> createState() => _EditeEventWidgetState();
 }
 
 class _EditeEventWidgetState extends State<EditeEventWidget> {
-
-   int selectedTab =0 ;
-   DateTime? selectedDate;
-   TimeOfDay? selectedTime;
+  int selectedTab = 0;
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
   var formKey = GlobalKey<FormState>();
   var titleController = TextEditingController();
   var descriptionController = TextEditingController();
   String? formatedDate;
   String? formatedTime;
-  late String selectedImage ;
-  late String selectedEventName ;
+  late String selectedImage;
+  late String selectedEventName;
   late EventListProvider eventListProvider;
 
   @override
-  Widget build(BuildContext context) {
-    EventWidget args = ModalRoute.of(context)?.settings.arguments as EventWidget ;
+  void initState() {
+    super.initState();
+    EventWidget args =
+        ModalRoute.of(context)?.settings.arguments as EventWidget;
     selectedImage = args.event.image;
     selectedEventName = args.event.eventName;
     selectedDate = args.event.dateTime;
-    formatedTime= args.event.time;
+    formatedTime = args.event.time;
     titleController.text = args.event.title;
     descriptionController.text = args.event.description;
     eventListProvider = Provider.of<EventListProvider>(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    EventWidget args =
+        ModalRoute.of(context)?.settings.arguments as EventWidget;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
-
-
     List<String> eventList = [
       AppLocalizations.of(context)!.sport,
       AppLocalizations.of(context)!.birthday,
@@ -73,9 +76,9 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
       AssetsManager.bookclubBg,
       AssetsManager.workshopBg,
     ];
-
     selectedEventName = eventList[selectedTab];
     selectedImage = eventImageList[selectedTab];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparent,
@@ -107,7 +110,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                 ),
                 Container(
                   margin:
-                  EdgeInsets.only(top: height * .01, bottom: height * .001),
+                      EdgeInsets.only(top: height * .01, bottom: height * .001),
                   height: height * .05,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -115,13 +118,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            for(int index=0;index<eventList.length;index++){
-                              if(eventList[index]==args.event.eventName){
-                                selectedTab==index;
-                                print('selected tab is $index');
-
-                              }
-                            }
+                            selectedTab == index;
                             setState(() {});
                           },
                           child: TabEventWidget(
@@ -146,7 +143,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                     if (text == null || text.isEmpty) {
                       return 'Please Enter Event Title';
                     }
-                    return null ;
+                    return null;
                   },
                   borderColor: AppColors.gray,
                   preIcon: Icons.edit_note_outlined,
@@ -163,7 +160,6 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                   height: height * .015,
                 ),
                 CustomTextFormField(
-
                   controller: descriptionController,
                   validator: (text) {
                     if (text == null || text.isEmpty) {
@@ -221,7 +217,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                         chooseTime();
                       },
                       child: Text(
-                       formatedTime.toString(),
+                        formatedTime.toString(),
                         style: AppStyle.primary14bold,
                       ),
                     ),
@@ -238,15 +234,13 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                   height: height * .015,
                 ),
                 CustomElevatedButton(
-                  onButtonClicked: () {
-                  },
+                  onButtonClicked: () {},
                   preIcon: AssetsManager.locationIcon,
                   buttonColor: AppColors.bglight,
                   buttonName: AppLocalizations.of(context)!.location,
                   textColor: AppColors.blue,
                   borderColor: AppColors.blue,
                   afterIcon: AssetsManager.arrow_icon,
-
                 ),
                 SizedBox(
                   height: height * .015,
@@ -298,15 +292,9 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
 
   void chooseTime() async {
     var chosenTime =
-    await showTimePicker(context: context, initialTime: TimeOfDay.now());
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
     selectedTime = chosenTime;
     formatedTime = selectedTime!.format(context);
     setState(() {});
   }
 }
-
-
-
-
-
-
