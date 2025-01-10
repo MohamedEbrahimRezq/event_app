@@ -1,4 +1,5 @@
 import 'package:event_planning_app/app_utls/app_styles.dart';
+import 'package:event_planning_app/ui/reuseable_widgets/alert_dialoge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,10 +12,10 @@ import 'login_screen.dart';
 
 class CreateAccount extends StatelessWidget {
   static const String routeName = 'register';
-  var nameController = TextEditingController(text: "Mohamed");
-  var emailController = TextEditingController(text: "Mohamed@sasa.com");
-  var passwordController = TextEditingController(text: "123456");
-  var rePasswordController = TextEditingController(text: "123456");
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var rePasswordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -22,7 +23,10 @@ class CreateAccount extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text( AppLocalizations.of(context)!.register,style: AppStyle.white20medium,),
+        title: Text(
+          AppLocalizations.of(context)!.register,
+          style: AppStyle.white20medium,
+        ),
         centerTitle: true,
         iconTheme: IconThemeData(color: AppColors.white),
       ),
@@ -42,8 +46,8 @@ class CreateAccount extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   controller: nameController,
-                  validator: (text){
-                    if (text == null || text.trim().isEmpty){
+                  validator: (text) {
+                    if (text == null || text.trim().isEmpty) {
                       return "please enter name";
                     }
                     return null;
@@ -57,14 +61,14 @@ class CreateAccount extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   controller: emailController,
-                  validator: (text){
-                    if (text == null || text.trim().isEmpty){
+                  validator: (text) {
+                    if (text == null || text.trim().isEmpty) {
                       return "please enter email";
                     }
-                    final bool emailValid =
-                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    final bool emailValid = RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(text);
-                    if(!emailValid){
+                    if (!emailValid) {
                       return "please enter valid email";
                     }
                     return null;
@@ -78,11 +82,11 @@ class CreateAccount extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   controller: passwordController,
-                  validator: (text){
-                    if (text == null || text.trim().isEmpty){
+                  validator: (text) {
+                    if (text == null || text.trim().isEmpty) {
                       return "please enter password";
                     }
-                    if (text.length < 6 ){
+                    if (text.length < 6) {
                       return " Password should be more than 6 chars";
                     }
                     return null;
@@ -97,14 +101,14 @@ class CreateAccount extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   controller: rePasswordController,
-                  validator: (text){
-                    if (text == null || text.trim().isEmpty){
+                  validator: (text) {
+                    if (text == null || text.trim().isEmpty) {
                       return "please enter rePassword";
                     }
-                    if (text.length < 6 ){
+                    if (text.length < 6) {
                       return " Password should be more than 6 chars";
                     }
-                    if( text != passwordController.text){
+                    if (text != passwordController.text) {
                       return "password not match";
                     }
                     return null;
@@ -118,8 +122,8 @@ class CreateAccount extends StatelessWidget {
                   height: height * .015,
                 ),
                 CustomElevatedButton(
-                  onButtonClicked: (){
-                    register();
+                  onButtonClicked: () {
+                    register(context);
                   },
                   buttonColor: AppColors.primaryColorLight,
                   buttonName: AppLocalizations.of(context)!.create_account,
@@ -135,7 +139,7 @@ class CreateAccount extends StatelessWidget {
                     Text(AppLocalizations.of(context)!.have_Account,
                         style: AppStyle.black16medium),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, LoginScreen.routeName);
                       },
                       child: Text(
@@ -150,34 +154,44 @@ class CreateAccount extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
         ),
       ),
-
     );
   }
 
-  void register() async {
-    if(formKey.currentState?.validate()== true){
-          try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      print ('Account created');
-      print(credential.user?.uid??" ");
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+  void register(BuildContext context) async {
+    if (formKey.currentState?.validate() == true) {
+      DialogAlert.showLoading(
+          context: context,
+          message: 'Loading....');
+      try {
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        DialogAlert.hideLoading(context);
+        DialogAlert.showMessage(context: context, message: 'Account created successfully', posActionName: 'ok', posAction: (){
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        });
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          DialogAlert.hideLoading(context);
+          DialogAlert.showMessage(context: context, message: 'The password provided is too weak.');
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          DialogAlert.hideLoading(context);
+          DialogAlert.showMessage(context: context, message: 'The account already exists for that email.');
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        DialogAlert.hideLoading(context);
+        DialogAlert.showMessage(context: context, message: e.toString());
+        print(e);
       }
-    } catch (e) {
-      print(e);
-    }
     }
   }
 }
