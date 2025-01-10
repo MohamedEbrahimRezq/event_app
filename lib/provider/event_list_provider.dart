@@ -99,6 +99,25 @@ class EventListProvider extends ChangeNotifier {
 
   }
 
+  void updateEventData(Event event) async {
+    FirebaseFiles.getEventCollection()
+        .doc(event.id)
+        .update({
+      'title' : event.title,
+      'description' : event.description,
+      'eventName' : event.eventName,
+      'image' : event.image,
+      'dateTime' : event.dateTime.millisecondsSinceEpoch,
+      'time' : event.time,
+      'isFavorite' : !event.isfavorite,
+    }).timeout(
+        Duration(milliseconds: 500), onTimeout: () {
+      print('Event added to Favorite');
+    });
+    notifyListeners();
+  }
+
+
 
 
 }

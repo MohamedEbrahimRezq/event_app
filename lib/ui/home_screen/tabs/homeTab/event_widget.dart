@@ -75,7 +75,6 @@ EventWidget({required this.event});
                   InkWell(
                     onTap: () {
                         eventListProvider.updateFavoriteEvents(event);
-
                     },
                     child: event.isfavorite == true
                     ? Icon(
