@@ -28,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
 
       validator: validator,
       controller: controller,
+
       onTap: (){},
       maxLines: numLines,
       style: AppStyle.primary14bold.copyWith(

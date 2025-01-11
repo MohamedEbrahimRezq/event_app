@@ -22,6 +22,67 @@ class EditeEventWidget extends StatefulWidget {
 }
 
 class _EditeEventWidgetState extends State<EditeEventWidget> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final EventWidget args = ModalRoute.of(context)?.settings.arguments as EventWidget;
+    selectedImage = args.event.image;
+    selectedEventName = args.event.eventName;
+    selectedDate = args.event.dateTime;
+    formatedTime = args.event.time;
+    titleController.text = args.event.title;
+    descriptionController.text = args.event.description;
+    eventListProvider = Provider.of<EventListProvider>(context, listen:false);
+    List<String> eventList = [
+      AppLocalizations.of(context)!.sport,
+      AppLocalizations.of(context)!.birthday,
+      AppLocalizations.of(context)!.meeting,
+      AppLocalizations.of(context)!.gaming,
+      AppLocalizations.of(context)!.eating,
+      AppLocalizations.of(context)!.holiday,
+      AppLocalizations.of(context)!.exhibition,
+      AppLocalizations.of(context)!.book_club,
+      AppLocalizations.of(context)!.work_shop,
+    ];
+    for (int i = 0; i < eventList.length; i++) {
+      if (args.event.eventName == eventList[i]) {
+        selectedTab == i;
+      }
+    }
+    }
+
+  /*late EventListProvider eventListProvider;*/
+  @override
+  /*void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      EventWidget args =
+          ModalRoute.of(context)?.settings.arguments as EventWidget;
+      selectedImage=args.event.image;
+      selectedEventName=args.event.eventName;
+      selectedDate = args.event.dateTime;
+      formatedTime = args.event.time;
+      titleController.text = args.event.title;
+      descriptionController.text = args.event.description;
+
+      List<String> eventList = [
+        AppLocalizations.of(context)!.sport,
+        AppLocalizations.of(context)!.birthday,
+        AppLocalizations.of(context)!.meeting,
+        AppLocalizations.of(context)!.gaming,
+        AppLocalizations.of(context)!.eating,
+        AppLocalizations.of(context)!.holiday,
+        AppLocalizations.of(context)!.exhibition,
+        AppLocalizations.of(context)!.book_club,
+        AppLocalizations.of(context)!.work_shop,
+      ];
+      for (int i = 0; i < eventList.length; i++) {
+        if (args.event.eventName == eventList[i]) {
+          selectedTab == i;
+        }
+      }
+    });
+  }*/
   int selectedTab = 0;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -32,26 +93,12 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
   String? formatedTime;
   late String selectedImage;
   late String selectedEventName;
-  late EventListProvider eventListProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    EventWidget args =
-        ModalRoute.of(context)?.settings.arguments as EventWidget;
-    selectedImage = args.event.image;
-    selectedEventName = args.event.eventName;
-    selectedDate = args.event.dateTime;
-    formatedTime = args.event.time;
-    titleController.text = args.event.title;
-    descriptionController.text = args.event.description;
-    eventListProvider = Provider.of<EventListProvider>(context);
-  }
-
+  late  EventListProvider eventListProvider;
   @override
   Widget build(BuildContext context) {
     EventWidget args =
         ModalRoute.of(context)?.settings.arguments as EventWidget;
+    EventListProvider eventListProvider = Provider.of<EventListProvider>(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List<String> eventList = [
@@ -76,14 +123,13 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
       AssetsManager.bookclubBg,
       AssetsManager.workshopBg,
     ];
-    selectedEventName = eventList[selectedTab];
     selectedImage = eventImageList[selectedTab];
-
+    selectedEventName = eventList[selectedTab];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparent,
         title: Text(
-          AppLocalizations.of(context)!.editeEvent,
+          AppLocalizations.of(context)!.create_event,
           style: AppStyle.primary14bold,
         ),
         centerTitle: true,
@@ -118,7 +164,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            selectedTab == index;
+                            selectedTab = index;
                             setState(() {});
                           },
                           child: TabEventWidget(
@@ -216,8 +262,9 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                       onTap: () {
                         chooseTime();
                       },
-                      child: Text(
-                        formatedTime.toString(),
+                      child: Text( selectedTime == null
+                          ? AppLocalizations.of(context)!.chooseTime
+                          : formatedTime!,
                         style: AppStyle.primary14bold,
                       ),
                     ),
@@ -247,6 +294,9 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                 ),
                 CustomElevatedButton(
                     onButtonClicked: () {
+                      eventListProvider.deleteEvent(args.event);
+                      eventListProvider.getAllEvents();
+                      eventListProvider.getFavoriteEvents();
                       addEventButton();
                     },
                     buttonColor: AppColors.blue,
@@ -262,6 +312,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
   }
 
   void addEventButton() {
+    EventListProvider eventListProvider = Provider.of<EventListProvider>(context);
     if (formKey.currentState?.validate() == true) {
       // todo:firebase logic
       Event event = Event(
