@@ -1,4 +1,6 @@
 import 'package:event_planning_app/app_utls/app_styles.dart';
+import 'package:event_planning_app/fire_base/firebase_files.dart';
+import 'package:event_planning_app/fire_base/model/myUser.dart';
 import 'package:event_planning_app/ui/reuseable_widgets/alert_dialoge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -177,6 +179,12 @@ class CreateAccount extends StatelessWidget {
         DialogAlert.showMessage(context: context, message: 'Account created successfully', posActionName: 'ok', posAction: (){
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
         });
+        MyUser myUser = MyUser(
+            id: credential.user?.uid?? '',
+            name: nameController.text,
+            email: emailController.text
+        );
+        FirebaseFiles.addUserToFireStore(myUser);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           DialogAlert.hideLoading(context);

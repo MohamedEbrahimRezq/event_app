@@ -1,6 +1,7 @@
 import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/fire_base/firebase_files.dart';
 import 'package:event_planning_app/ui/reuseable_widgets/alert_dialoge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -179,6 +180,10 @@ class LoginScreen extends StatelessWidget {
             email: emailController.text,
             password: passwordController.text
         );
+        var user = await FirebaseFiles.readUserFromFireStore(credential.user?.uid??'');
+        if ( user == null){
+          return;
+        }
         //print('Login successfully');
         DialogAlert.hideLoading(context);
         DialogAlert.showMessage(context: context, message: 'Login successfully', posActionName: 'ok', posAction: (){
@@ -196,10 +201,8 @@ class LoginScreen extends StatelessWidget {
   Future<UserCredential> signInWithGoogle() async{
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-    // Create a new credential
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
@@ -212,7 +215,7 @@ class LoginScreen extends StatelessWidget {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> googleSignInMethod() async {
+  Future<void> googleSignInMethod(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -224,6 +227,7 @@ class LoginScreen extends StatelessWidget {
 
       final userCredential = await _auth.signInWithCredential(credential);
       final user = userCredential.user;
+      Navigator.pushNamed(context, LoginScreen.routeName);
       // Navigate or perform other actions with the signed-in user
     } on FirebaseAuthException catch (e) {
       print('Error signing in with Google: $e');
