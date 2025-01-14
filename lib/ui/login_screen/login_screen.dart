@@ -2,9 +2,11 @@ import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
 import 'package:event_planning_app/fire_base/firebase_files.dart';
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:event_planning_app/ui/reuseable_widgets/alert_dialoge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../home_screen/home_screen.dart';
@@ -184,7 +186,8 @@ class LoginScreen extends StatelessWidget {
         if ( user == null){
           return;
         }
-        //print('Login successfully');
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(user);
         DialogAlert.hideLoading(context);
         DialogAlert.showMessage(context: context, message: 'Login successfully', posActionName: 'ok', posAction: (){
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);

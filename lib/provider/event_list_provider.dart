@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../fire_base/firebase_files.dart';
 import '../fire_base/model/events.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,9 +29,9 @@ class EventListProvider extends ChangeNotifier {
     ];
   }
 
-  void getAllEvents() async {
+  void getAllEvents(String uId) async {
     QuerySnapshot<Event> querySnapshot =
-        await FirebaseFiles.getEventCollection()
+        await FirebaseFiles.getEventCollection(uId)
             .orderBy('dateTime', descending: false)
             .get();
     addedEventList = querySnapshot.docs.map((doc) {
@@ -39,10 +41,10 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getFilteredEvents() async {
+  void getFilteredEvents(String uId) async {
     getEventNameList;
     QuerySnapshot<Event> querySnapshot =
-        await FirebaseFiles.getEventCollection()
+        await FirebaseFiles.getEventCollection(uId)
             .orderBy('dateTime', descending: false)
             .get();
     addedEventList = querySnapshot.docs.map((doc) {
@@ -55,30 +57,29 @@ class EventListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeSelectedTab(int newSelectedTab) {
+  void changeSelectedTab(int newSelectedTab, String uId) {
     selectedTab = newSelectedTab;
     if (selectedTab == 0) {
-      getAllEvents();
+      getAllEvents(uId);
     } else {
-      getFilteredEvents();
+      getFilteredEvents(uId);
     }
   }
 
-  void updateFavoriteEvents(Event event) async {
-    FirebaseFiles.getEventCollection()
+  void updateFavoriteEvents(Event event,String uId) async {
+    FirebaseFiles.getEventCollection(uId)
         .doc(event.id)
         .update({'isFavorite': !event.isfavorite}).timeout(
             Duration(milliseconds: 500), onTimeout: () {
       print('Event added to Favorite');
     });
-    selectedTab == 0 ? getAllEvents() : getFilteredEvents();
-    getFavoriteEvents();
+    selectedTab == 0 ? getAllEvents(uId) : getFilteredEvents(uId);
+    getFavoriteEvents(uId);
     notifyListeners();
   }
 
-
-  void getFavoriteEvents() async {
-    var querySnapshot = await FirebaseFiles.getEventCollection()
+  void getFavoriteEvents(String uId) async {
+    var querySnapshot = await FirebaseFiles.getEventCollection(uId)
         .orderBy('dateTime', descending: false)
         .where('isFavorite', isEqualTo: true)
         .get();
@@ -87,8 +88,8 @@ class EventListProvider extends ChangeNotifier {
     }).toList();
   }
 
-  void deleteEvent(Event event){
-    FirebaseFiles.getEventCollection()
+  void deleteEvent(Event event, String uId){
+    FirebaseFiles.getEventCollection(uId)
         .doc(event.id)
         .delete()
         .then((value) => print("Event Deleted"))
@@ -99,8 +100,8 @@ class EventListProvider extends ChangeNotifier {
 
   }
 
-  void updateEventData(Event event) async {
-    FirebaseFiles.getEventCollection()
+  void updateEventData(Event event,String uId) async {
+    FirebaseFiles.getEventCollection(uId)
         .doc(event.id)
         .update({
       'title' : event.title,

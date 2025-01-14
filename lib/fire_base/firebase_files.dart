@@ -3,9 +3,8 @@ import 'package:event_planning_app/fire_base/model/myUser.dart';
 import 'model/events.dart';
 
 class FirebaseFiles {
-  static CollectionReference<Event> getEventCollection() {
-    return FirebaseFirestore.instance
-        .collection(Event.collectionName)
+  static CollectionReference<Event> getEventCollection(String uId) {
+    return getUsersCollection().doc(uId).collection(Event.collectionName)
         .withConverter<Event>(
             fromFirestore: (snapshot, option) =>
                 Event.fromFireStore(snapshot.data()!),
@@ -29,8 +28,8 @@ class FirebaseFiles {
     return querySnapshot.data();
   }
 
-  static Future<void> addEventToFireStore(Event event) {
-    var collection = getEventCollection();
+  static Future<void> addEventToFireStore(Event event, String uId) {
+    var collection = getEventCollection(uId);
     var docRef = collection.doc();
     event.id = docRef.id;
     return docRef.set(event);

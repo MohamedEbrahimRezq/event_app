@@ -3,6 +3,7 @@ import 'package:event_planning_app/app_utls/app_theme.dart';
 import 'package:event_planning_app/provider/event_list_provider.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
 import 'package:event_planning_app/provider/theme_provider.dart';
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:event_planning_app/ui/home_screen/create_event_screen/create_event.dart';
 import 'package:event_planning_app/ui/home_screen/edite_event_widget.dart';
 import 'package:event_planning_app/ui/home_screen/event_details_widget.dart';
@@ -27,7 +28,8 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => AppLanguageProvider()),
     ChangeNotifierProvider(create: (context) => AppThemeProvider()),
-    ChangeNotifierProvider(create: (context) => EventListProvider())
+    ChangeNotifierProvider(create: (context) => EventListProvider()),
+    ChangeNotifierProvider(create: (context) => UserProvider())
   ], child: const MyApp()));
 }
 

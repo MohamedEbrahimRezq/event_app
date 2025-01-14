@@ -6,7 +6,9 @@ import 'package:event_planning_app/ui/home_screen/tabs/mapTab/map_tab.dart';
 import 'package:event_planning_app/ui/home_screen/tabs/profileTab/profile_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/user_provider.dart';
 import 'create_event_screen/create_event.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home_screen';

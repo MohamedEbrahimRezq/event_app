@@ -1,4 +1,5 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:event_planning_app/ui/home_screen/home_screen.dart';
 import 'package:event_planning_app/ui/home_screen/tabs/homeTab/event_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class EventDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
     EventListProvider eventListProvider = Provider.of<EventListProvider>(context);
     EventWidget args = ModalRoute.of(context)?.settings.arguments as EventWidget ;
     var height = MediaQuery.of(context).size.height;
@@ -45,9 +47,9 @@ class EventDetailsWidget extends StatelessWidget {
           InkWell(
               onTap: () {
                 // todo:  delete the event
-                eventListProvider.deleteEvent(args.event);
-                eventListProvider.getAllEvents();
-                eventListProvider.getFavoriteEvents();
+                eventListProvider.deleteEvent(args.event,userProvider.currentUser!.id);
+                eventListProvider.getAllEvents(userProvider.currentUser!.id);
+                eventListProvider.getFavoriteEvents(userProvider.currentUser!.id);
                 Navigator.of(context).pushNamed(HomeScreen.routeName);
               },
               child: Image(image: AssetImage(AssetsManager.delete_icon))),

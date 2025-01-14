@@ -2,6 +2,7 @@ import 'package:event_planning_app/app_utls/app_colors.dart';
 import 'package:event_planning_app/app_utls/app_styles.dart';
 import 'package:event_planning_app/app_utls/assets_manager.dart';
 import 'package:event_planning_app/provider/language_provider.dart';
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:event_planning_app/ui/home_screen/tabs/profileTab/theme_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,6 +25,7 @@ class _ProfileTabState extends State<ProfileTab> {
     var width = MediaQuery.of(context).size.width;
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -54,12 +56,12 @@ class _ProfileTabState extends State<ProfileTab> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'My Name',
+                              userProvider.currentUser!.name,
                               style: AppStyle.white24bold,
                             ),
                             Text(
                               overflow: TextOverflow.fade,
-                              " MyEmailMyEmailMyEmail@RouteAcademy.com",
+                              userProvider.currentUser!.email,
                               style: AppStyle.white16medium,
                               textAlign: TextAlign.justify,
                             ),
