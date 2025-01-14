@@ -262,15 +262,18 @@ class _CreateEventState extends State<CreateEvent> {
           dateTime: selectedDate!,
           time: formatedTime!);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
-      FirebaseFiles.addEventToFireStore(event, userProvider.currentUser!.id)/*then((value){
+      FirebaseFiles.addEventToFireStore(event, userProvider.currentUser!.id).
+      then((value){
       print('Event Added Successfully.');
       eventListProvider.getAllEvents(userProvider.currentUser!.id);
-      Navigator.pop(context);
-      })*/
-          .timeout(Duration(milliseconds: 500), onTimeout: () {});
-      print('Event Added Successfully.');
-      eventListProvider.getAllEvents(userProvider.currentUser!.id);
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      })
+          .timeout(Duration(milliseconds: 500),
+          onTimeout: () {
+        print('Event Added Successfully.');
+        eventListProvider.getAllEvents(userProvider.currentUser!.id);
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      });
+
     }
   }
 
