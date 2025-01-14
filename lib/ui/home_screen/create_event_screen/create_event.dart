@@ -1,4 +1,5 @@
 import 'package:event_planning_app/app_utls/assets_manager.dart';
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,7 @@ class _CreateEventState extends State<CreateEvent> {
 
   @override
   Widget build(BuildContext context) {
-    eventListProvider = Provider.of<EventListProvider>(context);
+    var eventListProvider = Provider.of<EventListProvider>(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List<String> eventList = [
@@ -260,10 +261,15 @@ class _CreateEventState extends State<CreateEvent> {
           eventName: selectedEventName,
           dateTime: selectedDate!,
           time: formatedTime!);
-      FirebaseFiles.addEventToFireStore(event)
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      FirebaseFiles.addEventToFireStore(event, userProvider.currentUser!.id)/*then((value){
+      print('Event Added Successfully.');
+      eventListProvider.getAllEvents(userProvider.currentUser!.id);
+      Navigator.pop(context);
+      })*/
           .timeout(Duration(milliseconds: 500), onTimeout: () {});
       print('Event Added Successfully.');
-      eventListProvider.getAllEvents();
+      eventListProvider.getAllEvents(userProvider.currentUser!.id);
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }

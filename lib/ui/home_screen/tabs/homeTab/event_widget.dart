@@ -6,6 +6,7 @@ import '../../../../app_utls/app_colors.dart';
 import '../../../../app_utls/app_styles.dart';
 import '../../../../fire_base/model/events.dart';
 import '../../../../provider/event_list_provider.dart';
+import '../../../../provider/user_provider.dart';
 import '../../event_details_widget.dart';
 
 class EventWidget extends StatelessWidget {
@@ -14,6 +15,7 @@ EventWidget({required this.event});
   @override
   Widget build(BuildContext context) {
     var eventListProvider = Provider.of<EventListProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return InkWell(
@@ -74,7 +76,7 @@ EventWidget({required this.event});
                   ),
                   InkWell(
                     onTap: () {
-                        eventListProvider.updateFavoriteEvents(event);
+                        eventListProvider.updateFavoriteEvents(event,userProvider.currentUser!.id);
                     },
                     child: event.isfavorite == true
                     ? Icon(

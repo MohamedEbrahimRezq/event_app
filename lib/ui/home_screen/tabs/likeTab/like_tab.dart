@@ -1,3 +1,4 @@
+import 'package:event_planning_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../app_utls/app_colors.dart';
@@ -12,8 +13,9 @@ class LikeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    var eventListProvider = Provider.of<EventListProvider>(context);
+   var userProvider = Provider.of<UserProvider>(context);
    if(eventListProvider.filteredFavoriteEventList.isEmpty){
-     eventListProvider.getFavoriteEvents();
+     eventListProvider.getFavoriteEvents(userProvider.currentUser!.id);
    }
     var height = MediaQuery.of(context).size.height;
     return Scaffold(

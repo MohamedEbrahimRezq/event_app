@@ -10,6 +10,7 @@ import '../../../app_utls/app_styles.dart';
 import '../../../fire_base/firebase_files.dart';
 import '../../../fire_base/model/events.dart';
 import '../../../provider/event_list_provider.dart';
+import '../../provider/user_provider.dart';
 import '../reuseable_widgets/custom_elevated_button.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
 import 'home_screen.dart';
@@ -96,6 +97,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
   late  EventListProvider eventListProvider;
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
     EventWidget args =
         ModalRoute.of(context)?.settings.arguments as EventWidget;
     EventListProvider eventListProvider = Provider.of<EventListProvider>(context);
@@ -294,9 +296,9 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                 ),
                 CustomElevatedButton(
                     onButtonClicked: () {
-                      eventListProvider.deleteEvent(args.event);
-                      eventListProvider.getAllEvents();
-                      eventListProvider.getFavoriteEvents();
+                      eventListProvider.deleteEvent(args.event,userProvider.currentUser!.id);
+                      eventListProvider.getAllEvents(userProvider.currentUser!.id);
+                      eventListProvider.getFavoriteEvents(userProvider.currentUser!.id);
                       addEventButton();
                     },
                     buttonColor: AppColors.blue,
@@ -322,10 +324,11 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
           eventName: selectedEventName,
           dateTime: selectedDate!,
           time: formatedTime!);
-      FirebaseFiles.addEventToFireStore(event)
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      FirebaseFiles.addEventToFireStore(event, userProvider.currentUser!.id)
           .timeout(Duration(milliseconds: 500), onTimeout: () {});
       print('Event Added Successfully.');
-      eventListProvider.getAllEvents();
+      eventListProvider.getAllEvents(userProvider.currentUser!.id);
       Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }

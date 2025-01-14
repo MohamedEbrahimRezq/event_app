@@ -5,6 +5,7 @@ import 'package:event_planning_app/ui/home_screen/tabs/homeTab/tab_event_widget.
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import '../../../../provider/user_provider.dart';
 import 'event_widget.dart';
 
 class HomeTab extends StatefulWidget {
@@ -19,10 +20,11 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    eventListProvider = Provider.of<EventListProvider>(context);
+    var eventListProvider = Provider.of<EventListProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     eventListProvider.getEventNameList(context);
     if (eventListProvider.addedEventList.isEmpty) {
-      eventListProvider.getAllEvents();
+      eventListProvider.getAllEvents(userProvider.currentUser!.id);
     }
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -60,7 +62,7 @@ class _HomeTabState extends State<HomeTab> {
                             style: AppStyle.white14regular,
                           ),
                           Text(
-                            'My Name',
+                            userProvider.currentUser!.name,
                             style: AppStyle.white24bold,
                           ),
                           Row(
@@ -122,7 +124,7 @@ class _HomeTabState extends State<HomeTab> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            eventListProvider.changeSelectedTab(index);
+                            eventListProvider.changeSelectedTab(index,userProvider.currentUser!.id);
                             setState(() {});
                           },
                           child: TabEventWidget(

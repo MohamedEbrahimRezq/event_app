@@ -5,8 +5,10 @@ import 'package:event_planning_app/ui/reuseable_widgets/alert_dialoge.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import '../../app_utls/app_colors.dart';
 import '../../app_utls/assets_manager.dart';
+import '../../provider/user_provider.dart';
 import '../reuseable_widgets/custom_elevated_button.dart';
 import '../reuseable_widgets/custom_text_form_feild.dart';
 import '../home_screen/home_screen.dart';
@@ -185,6 +187,8 @@ class CreateAccount extends StatelessWidget {
             email: emailController.text
         );
         FirebaseFiles.addUserToFireStore(myUser);
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(myUser);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           DialogAlert.hideLoading(context);
