@@ -26,14 +26,15 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final EventWidget args = ModalRoute.of(context)?.settings.arguments as EventWidget;
+    final EventWidget args =
+        ModalRoute.of(context)?.settings.arguments as EventWidget;
     selectedImage = args.event.image;
     selectedEventName = args.event.eventName;
     selectedDate = args.event.dateTime;
     formatedTime = args.event.time;
     titleController.text = args.event.title;
     descriptionController.text = args.event.description;
-    eventListProvider = Provider.of<EventListProvider>(context, listen:false);
+    eventListProvider = Provider.of<EventListProvider>(context, listen: false);
     List<String> eventList = [
       AppLocalizations.of(context)!.sport,
       AppLocalizations.of(context)!.birthday,
@@ -50,7 +51,7 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
         selectedTab == i;
       }
     }
-    }
+  }
 
   /*late EventListProvider eventListProvider;*/
   @override
@@ -94,13 +95,15 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
   String? formatedTime;
   late String selectedImage;
   late String selectedEventName;
-  late  EventListProvider eventListProvider;
+  late EventListProvider eventListProvider;
+
   @override
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
     EventWidget args =
         ModalRoute.of(context)?.settings.arguments as EventWidget;
-    EventListProvider eventListProvider = Provider.of<EventListProvider>(context);
+    EventListProvider eventListProvider =
+        Provider.of<EventListProvider>(context);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     List<String> eventList = [
@@ -264,9 +267,10 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                       onTap: () {
                         chooseTime();
                       },
-                      child: Text( selectedTime == null
-                          ? AppLocalizations.of(context)!.chooseTime
-                          : formatedTime!,
+                      child: Text(
+                        selectedTime == null
+                            ? AppLocalizations.of(context)!.chooseTime
+                            : formatedTime!,
                         style: AppStyle.primary14bold,
                       ),
                     ),
@@ -296,9 +300,12 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
                 ),
                 CustomElevatedButton(
                     onButtonClicked: () {
-                      eventListProvider.deleteEvent(args.event,userProvider.currentUser!.id);
-                      eventListProvider.getAllEvents(userProvider.currentUser!.id);
-                      eventListProvider.getFavoriteEvents(userProvider.currentUser!.id);
+                      eventListProvider.deleteEvent(
+                          args.event, userProvider.currentUser!.id);
+                      eventListProvider
+                          .getAllEvents(userProvider.currentUser!.id);
+                      eventListProvider
+                          .getFavoriteEvents(userProvider.currentUser!.id);
                       addEventButton();
                     },
                     buttonColor: AppColors.blue,
@@ -314,7 +321,8 @@ class _EditeEventWidgetState extends State<EditeEventWidget> {
   }
 
   void addEventButton() {
-    EventListProvider eventListProvider = Provider.of<EventListProvider>(context);
+    EventListProvider eventListProvider =
+        Provider.of<EventListProvider>(context);
     if (formKey.currentState?.validate() == true) {
       // todo:firebase logic
       Event event = Event(

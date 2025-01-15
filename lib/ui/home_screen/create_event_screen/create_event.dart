@@ -129,7 +129,7 @@ class _CreateEventState extends State<CreateEvent> {
                     if (text == null || text.isEmpty) {
                       return 'Please Enter Event Title';
                     }
-                    return null ;
+                    return null;
                   },
                   borderColor: AppColors.gray,
                   preIcon: Icons.edit_note_outlined,
@@ -222,15 +222,13 @@ class _CreateEventState extends State<CreateEvent> {
                   height: height * .015,
                 ),
                 CustomElevatedButton(
-                    onButtonClicked: () {
-                    },
-                    preIcon: AssetsManager.locationIcon,
-                    buttonColor: AppColors.bglight,
-                    buttonName: AppLocalizations.of(context)!.location,
-                    textColor: AppColors.blue,
-                    borderColor: AppColors.blue,
-                    afterIcon: AssetsManager.arrow_icon,
-
+                  onButtonClicked: () {},
+                  preIcon: AssetsManager.locationIcon,
+                  buttonColor: AppColors.bglight,
+                  buttonName: AppLocalizations.of(context)!.location,
+                  textColor: AppColors.blue,
+                  borderColor: AppColors.blue,
+                  afterIcon: AssetsManager.arrow_icon,
                 ),
                 SizedBox(
                   height: height * .015,
@@ -252,6 +250,8 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   void addEventButton() {
+    EventListProvider eventListProvider =
+    Provider.of<EventListProvider>(context, listen: false);
     if (formKey.currentState?.validate() == true) {
       // todo:firebase logic
       Event event = Event(
@@ -262,18 +262,13 @@ class _CreateEventState extends State<CreateEvent> {
           dateTime: selectedDate!,
           time: formatedTime!);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
-      FirebaseFiles.addEventToFireStore(event, userProvider.currentUser!.id).
-      then((value){
-      print('Event Added Successfully.');
+      FirebaseFiles.addEventToFireStore(event, userProvider.currentUser!.id)
+          .then((value) {
+        print('Event Added Successfully. 1');
+      }).timeout(Duration(milliseconds: 500), onTimeout: () {});
+      print('Event Added Successfully. 2');
       eventListProvider.getAllEvents(userProvider.currentUser!.id);
-      })
-          .timeout(Duration(milliseconds: 500),
-          onTimeout: () {
-        print('Event Added Successfully.');
-        eventListProvider.getAllEvents(userProvider.currentUser!.id);
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-      });
-
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     }
   }
 
