@@ -10,12 +10,9 @@ import '../../app_utls/app_styles.dart';
 import '../../provider/event_list_provider.dart';
 import '../reuseable_widgets/custom_elevated_button.dart';
 import 'edite_event_widget.dart';
-
 class EventDetailsWidget extends StatelessWidget {
   static const String routeName = 'eventDetails';
-
   const EventDetailsWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
