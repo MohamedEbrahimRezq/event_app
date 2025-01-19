@@ -52,6 +52,17 @@ class _CreateEventState extends State<CreateEvent> {
       AppLocalizations.of(context)!.book_club,
       AppLocalizations.of(context)!.work_shop,
     ];
+    List<String> enEventList = [
+      'Sport',
+      'Birthday',
+      'Meeting',
+      'Gaming',
+      'Eating',
+      'Holiday',
+      'Exhibition',
+      'Book Club',
+      'Work Shop',
+    ];
     List<String> eventImageList = [
       AssetsManager.sportBg,
       AssetsManager.birthdayBg,
@@ -64,7 +75,7 @@ class _CreateEventState extends State<CreateEvent> {
       AssetsManager.workshopBg,
     ];
     selectedImage = eventImageList[selectedTab];
-    selectedEventName = eventList[selectedTab];
+    selectedEventName = enEventList[selectedTab];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparent,

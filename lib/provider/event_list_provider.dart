@@ -29,6 +29,18 @@ class EventListProvider extends ChangeNotifier {
     ];
   }
 
+  List<String> enEventList = [
+    'Sport',
+    'Birthday',
+    'Meeting',
+    'Gaming',
+    'Eating',
+    'Holiday',
+    'Exhibition',
+    'Book Club',
+    'Work Shop',
+  ];
+
   void getAllEvents(String uId) async {
     QuerySnapshot<Event> querySnapshot =
         await FirebaseFiles.getEventCollection(uId)
@@ -51,7 +63,7 @@ class EventListProvider extends ChangeNotifier {
       return doc.data();
     }).toList();
     filteredEventList = addedEventList.where((event) {
-      return event.eventName == eventList[selectedTab];
+      return event.eventName == enEventList[selectedTab];
     }).toList();
     // todo : sort
     notifyListeners();
@@ -117,8 +129,4 @@ class EventListProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
-
-
-
-
 }

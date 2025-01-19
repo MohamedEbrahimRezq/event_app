@@ -10,7 +10,6 @@ class FirebaseFiles {
                 Event.fromFireStore(snapshot.data()!),
             toFirestore: (event, _) => event.toFireStore());
   }
-
   static CollectionReference<MyUser> getUsersCollection (){
     return FirebaseFirestore.instance.collection(MyUser.collectionName)
         .withConverter(
@@ -18,16 +17,13 @@ class FirebaseFiles {
         toFirestore: (myUser,_) => myUser.toFireStore()
     );
   }
-
   static Future<void> addUserToFireStore (MyUser myUser) {
     return getUsersCollection().doc(myUser.id).set(myUser);
   }
-
   static Future<MyUser?> readUserFromFireStore (String id) async{
     var querySnapshot = await getUsersCollection().doc(id).get();
     return querySnapshot.data();
   }
-
   static Future<void> addEventToFireStore(Event event, String uId) {
     var collection = getEventCollection(uId);
     var docRef = collection.doc();
